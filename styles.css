@@ -1094,7 +1094,12 @@ details p {
   max-height: min(820px, calc(100vh - 40px));
   overflow: auto;
   padding: 30px;
-  scrollbar-gutter: stable;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.apply-modal-content::-webkit-scrollbar {
+  display: none;
 }
 
 .modal-close {

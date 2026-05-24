@@ -1,22 +1,22 @@
 # Current Task
 
-- task: 브라우저 코멘트에 따라 신청 모달 내부 스크롤 중에도 닫기 버튼 위치가 유지되도록 수정한다.
+- task: 브라우저 코멘트에 따라 신청 모달 내부 스크롤바를 보이지 않게 처리한다.
 - phase: verification
 - status: complete
 
 # Orchestration Profile
 
 - score_total: 2
-- score_breakdown: targeted_modal_ux_fix=1, local_browser_verification=1
-- hard_triggers: browser comment on close button scroll behavior
+- score_breakdown: targeted_modal_visual_fix=1, local_browser_verification=1
+- hard_triggers: browser comment on visible modal scrollbar
 - selected_rules: spec-first, frontend implementation, local verification
 - selected_skills: none
-- selection_reason: 모달 콘텐츠 스크롤 시 닫기 버튼이 함께 이동하지 않도록 스크롤 영역과 고정 컨트롤을 분리한다.
+- selection_reason: 모달 내부 스크롤 동작은 유지하되 시각적으로 노출되는 스크롤바를 숨겨 화면 밀도를 낮춘다.
 - execution_topology: single-session
 - agent_budget: 0
 - efficiency_basis: 단일 모달 마크업/CSS 수정이라 분리 비용이 더 크다.
 - spawn_decision: no-spawn
-- reason: score_total 2이고 브라우저 코멘트가 닫기 버튼 sticky 동작에 한정되어 단일 세션에서 수정과 검증을 끝낸다.
+- reason: score_total 2이고 브라우저 코멘트가 모달 스크롤바 노출에 한정되어 단일 세션에서 수정과 검증을 끝낸다.
 
 # Writer Slot
 
@@ -36,9 +36,9 @@
 - contract_freeze: frozen
 - source: latest user request, README positioning, current static page
 - deliverables:
-  - Keep the close button visually fixed while modal content scrolls.
-  - Preserve modal sizing, internal scrolling, and existing close behavior.
-  - Avoid covering form labels or inputs with the close button.
+  - Hide the modal content scrollbar visually across modern browsers.
+  - Preserve internal scroll behavior and fixed close button behavior.
+  - Avoid layout shift from scrollbar gutter changes.
   - Preserve Lucide SVG icon usage instead of handmade CSS/text icons.
 - risks:
   - Do not regress modal form validation or submit behavior.
@@ -78,3 +78,5 @@
 - 2026-05-24 KST: Added required consent, email/URL validation, same-page fetch submission, and server-side Resend dispatch endpoint; static and browser checks passed.
 - 2026-05-24 KST: Reclassified for modal close button scroll persistence; selected single-session targeted update.
 - 2026-05-24 KST: Split modal scroll into `.apply-modal-content`; close button stays on the modal frame while internal content scrolls.
+- 2026-05-24 KST: Reclassified for hidden modal scrollbar; selected single-session targeted update.
+- 2026-05-24 KST: Hid `.apply-modal-content` scrollbar while preserving internal scroll; in-app browser verified `canScroll=true` and hidden scrollbar styles.
