@@ -1,22 +1,22 @@
 # Current Task
 
-- task: Standard 플랜에 승인 범위 내 제한적 수동 검증 옵션을 추가하고 침투테스트 오해를 줄인다.
+- task: 신청 모달의 이용약관/개인정보 더미 문구를 운영 초안으로 교체하고 법적 리스크를 줄인다.
 - phase: verification
 - status: complete
 
 # Orchestration Profile
 
-- score_total: 4
-- score_breakdown: security_scope_copy=2, product_positioning=1, local_browser_verification=1
-- hard_triggers: request to add penetration-test-like capability safely
-- selected_rules: spec-first, frontend implementation, security wording, local verification
-- selected_skills: none
-- selection_reason: 침투테스트로 오해될 표현은 피하고 Standard 플랜에 승인 범위 내 제한적 재현 확인을 상품력 있게 추가한다.
+- score_total: 8
+- score_breakdown: legal_terms=3, privacy_notice=2, security_service_scope=2, chrome_review_and_local_verification=1
+- hard_triggers: legal/privacy wording, security service liability boundary, user-requested Chrome Pro review
+- selected_rules: spec-first, security wording, legal-risk minimization, Chrome extension review, local verification
+- selected_skills: chrome-chatgpt-deep-research memory workflow, browser
+- selection_reason: 이용약관과 개인정보 처리 안내는 고객 권리, 책임 제한, 권한 보증, 개인정보 처리 항목을 명확히 해야 하는 법적 리스크 영역이다.
 - execution_topology: single-session
 - agent_budget: 0
-- efficiency_basis: 단일 모달 마크업/CSS 수정이라 분리 비용이 더 크다.
+- efficiency_basis: 단일 신청 모달 문구/CSS 수정이며 Chrome 검토와 공식 기준 확인은 주 작업을 막지 않는 보조 검증이다.
 - spawn_decision: no-spawn
-- reason: score_total 4이고 Standard 플랜, FAQ, 프로세스 카피에 한정된 보안 범위 표현 수정이라 단일 세션에서 수정과 검증을 끝낸다.
+- reason: score_total 8이지만 쓰기 범위가 `index.html`, `styles.css`, `STATE.md`로 좁고 약관 초안 반영은 하나의 응집된 카피 변경이라 단일 세션에서 수정, 검증, 자체 리뷰를 끝낸다.
 
 # Writer Slot
 
@@ -36,14 +36,15 @@
 - contract_freeze: frozen
 - source: latest user request, README positioning, current static page
 - deliverables:
-  - Add limited manual verification language to Standard plan.
-  - Clarify that verification is test-account and agreed-scope only.
-  - Keep prohibited actions visible: no unauthorized scans, load tests, destructive tests, or personal-data extraction.
-  - Preserve Lucide SVG icon usage instead of handmade CSS/text icons.
+  - Replace dummy terms with an operational draft covering service purpose, owner authority, scope, prohibited actions, output limits, cancellation/refund, confidentiality, and liability limits.
+  - Replace dummy privacy notice with an operational draft covering collected fields, purpose, retention, access data, third-party/tool use, data-subject rights, and safety measures.
+  - Keep visible legal-review warning so the page does not pretend final legal compliance.
+  - Preserve required owner, scope, and terms consent before submission.
 - risks:
-  - Do not market broad penetration testing as a core service.
-  - Do not imply exploit execution or destructive testing.
-  - Do not alter form submission or pricing behavior.
+  - Do not over-disclaim provider liability or exclude intentional/gross negligence.
+  - Do not weaken customer cancellation/refund rights.
+  - Do not imply full legal compliance before professional review.
+  - Do not alter form submission or validation behavior.
 
 # Reviewer
 
@@ -88,3 +89,5 @@
 - 2026-05-24 KST: Replaced public DB Rules/Supabase/Firebase wording with generic data access permission review; in-app browser verified zero vendor-specific mentions in scope and preview.
 - 2026-05-24 KST: Reclassified for limited manual verification positioning in Standard without broad penetration-test claims.
 - 2026-05-24 KST: Added Standard limited manual verification copy, FAQ exclusions, and plan notes; in-app browser verified no broad penetration-test claims.
+- 2026-05-24 KST: Reclassified for operational terms/privacy draft; Chrome Pro review and official privacy/terms criteria are being used to reduce legal-risky wording.
+- 2026-05-24 KST: Replaced dummy terms/privacy text with operational drafts; JS syntax checks and in-app browser modal disclosure verification passed.

@@ -1280,13 +1280,18 @@ select option {
   color: #aeb9bd;
 }
 
-.policy-body ul {
+.policy-body ul,
+.policy-body ol {
   margin: 0;
   padding-left: 18px;
 }
 
+.policy-body strong {
+  color: #eef3f4;
+}
+
 .policy-body li + li {
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
 .submit-button {
