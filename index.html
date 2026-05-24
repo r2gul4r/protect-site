@@ -374,7 +374,12 @@
 
     <div class="modal-backdrop" id="applyModal" role="dialog" aria-modal="true" aria-labelledby="applyTitle" hidden>
       <div class="apply-modal">
-        <button class="modal-close" type="button" aria-label="닫기" data-close-modal>×</button>
+        <button class="modal-close" type="button" aria-label="닫기" data-close-modal>
+          <svg class="lucide" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
+        </button>
         <h2 id="applyTitle">의뢰 신청</h2>
         <p>입력 내용으로 상담 메일 초안을 만듭니다. 자동 전송이나 서버 저장 없이, 사용자가 확인 후 직접 발송합니다.</p>
         <form id="applyForm" novalidate>

@@ -1,22 +1,22 @@
 # Current Task
 
-- task: 브라우저 코멘트에 따라 가격/FAQ 섹션의 내부 MVP 용어를 실서비스용 문구로 교체한다.
+- task: 브라우저 코멘트에 따라 신청 모달 닫기 버튼의 아이콘 정렬과 비율을 수정한다.
 - phase: verification
 - status: complete
 
 # Orchestration Profile
 
-- score_total: 3
-- score_breakdown: production_copy_fix=2, local_browser_verification=1
-- hard_triggers: browser comment on demo-like public wording
+- score_total: 2
+- score_breakdown: targeted_visual_hotfix=1, local_browser_verification=1
+- hard_triggers: browser comment on misaligned close icon
 - selected_rules: spec-first, frontend implementation, local verification
 - selected_skills: none
-- selection_reason: 공개 랜딩 페이지에 내부 단계 표현인 MVP가 노출되어 실사용 서비스 문구로 교체한다.
+- selection_reason: 신청 모달 닫기 버튼의 X 글리프가 시각적으로 중앙 정렬되지 않아 SVG 아이콘과 고정 크기 정렬로 수정한다.
 - execution_topology: single-session
 - agent_budget: 0
-- efficiency_basis: 단일 HTML 카피 수정이라 분리 비용이 더 크다.
+- efficiency_basis: 단일 모달 버튼 마크업/CSS 수정이라 분리 비용이 더 크다.
 - spawn_decision: no-spawn
-- reason: score_total 3이고 브라우저 코멘트가 가격/FAQ 카피에 한정되어 단일 세션에서 수정과 검증을 끝낸다.
+- reason: score_total 2이고 브라우저 코멘트가 모달 닫기 버튼 시각 정렬에 한정되어 단일 세션에서 수정과 검증을 끝낸다.
 
 # Writer Slot
 
@@ -34,9 +34,9 @@
 - contract_freeze: frozen
 - source: latest user request, README positioning, current static page
 - deliverables:
-  - Remove user-facing MVP wording from pricing and FAQ copy.
-  - Keep the no-login, no-card-payment, consultation-first product boundary.
-  - Preserve payment options as account transfer, PayPal, and platform escrow.
+  - Replace text close glyph with a Lucide SVG X icon.
+  - Center the close icon in a fixed square circular button.
+  - Preserve modal close behavior through the existing `data-close-modal` hook.
   - Preserve Lucide SVG icon usage instead of handmade CSS/text icons.
 - risks:
   - Do not add instructional clutter that feels like a prototype note.
@@ -68,3 +68,5 @@
 - 2026-05-24 KST: Review rail changed to inline preview tabs; removed bottom toast and risk-card click behavior; in-app browser DOM verification passed.
 - 2026-05-24 KST: Reclassified for production copy fix after browser comment on MVP wording; selected single-session targeted update.
 - 2026-05-24 KST: Removed public MVP/demo-like wording from pricing, apply, FAQ, and modal copy; in-app browser DOM verification passed with zero visible MVP/demo terms.
+- 2026-05-24 KST: Reclassified for modal close icon alignment; selected single-session targeted update.
+- 2026-05-24 KST: Replaced text close glyph with Lucide SVG X and verified modal close button/icon centers match in the in-app browser.
