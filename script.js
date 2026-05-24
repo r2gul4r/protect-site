@@ -10,7 +10,11 @@ const reviewContextTitle = document.querySelector("#reviewContextTitle");
 const reviewContextBody = document.querySelector("#reviewContextBody");
 const reviewContextList = document.querySelector("#reviewContextList");
 
-const intakeEmail = "hello@vibesec.review";
+const contactEmail = "hello@vibesec.review";
+const defaultIntakeEndpoint = "/api/inquiries";
+const allowedPlans = new Set(["Basic Review", "Standard Review", "Fix PR Add-on"]);
+const allowedStatuses = new Set(["개발중", "스테이징", "운영중"]);
+const allowedRepoAccess = new Set(["공개 repo", "비공개 repo 초대 가능", "repo 제공 불가"]);
 
 const reviewDetails = {
   basic: {
@@ -77,6 +81,11 @@ function closeModal() {
   document.body.style.overflow = "";
 }
 
+function setFormStatus(message, state = "info") {
+  formStatus.textContent = message;
+  formStatus.dataset.state = state;
+}
+
 function activateRail(item) {
   railItems.forEach((rail) => rail.classList.toggle("active", rail === item));
   railItems.forEach((rail) => rail.setAttribute("aria-selected", String(rail === item)));
@@ -110,50 +119,140 @@ function activateIssue(button) {
   codePanel.setAttribute("aria-label", message);
 }
 
-function submitApplication(event) {
-  event.preventDefault();
+function parseHttpUrl(value, fieldName, required = false) {
+  const trimmed = String(value || "").trim();
+  if (!trimmed) {
+    if (required) throw new Error(`${fieldName}을 입력해 주세요.`);
+    return "";
+  }
 
+  let parsed;
+  try {
+    parsed = new URL(trimmed);
+  } catch {
+    throw new Error(`${fieldName}은 https://example.com 형식으로 입력해 주세요.`);
+  }
+
+  if (!["http:", "https:"].includes(parsed.protocol)) {
+    throw new Error(`${fieldName}은 http 또는 https URL만 입력할 수 있습니다.`);
+  }
+
+  return parsed.href;
+}
+
+function validateApplication() {
   const data = new FormData(form);
   const name = String(data.get("name") || "").trim();
   const email = String(data.get("email") || "").trim();
-  const url = String(data.get("url") || "").trim();
+  const emailInput = form.elements.namedItem("email");
+  const urlInput = form.elements.namedItem("url");
+  const repoInput = form.elements.namedItem("repo");
 
-  if (!form.checkValidity() || !name || !email || !url) {
+  emailInput.setCustomValidity("");
+  urlInput.setCustomValidity("");
+  repoInput.setCustomValidity("");
+
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(email)) {
+    emailInput.setCustomValidity("올바른 이메일 형식으로 입력해 주세요.");
+  }
+
+  let serviceUrl = "";
+  let repoUrl = "";
+
+  try {
+    serviceUrl = parseHttpUrl(data.get("url"), "서비스 URL", true);
+  } catch (error) {
+    urlInput.setCustomValidity(error.message);
+  }
+
+  try {
+    repoUrl = parseHttpUrl(data.get("repo"), "GitHub repo URL");
+  } catch (error) {
+    repoInput.setCustomValidity(error.message);
+  }
+
+  const plan = String(data.get("plan") || "");
+  const status = String(data.get("status") || "");
+  const repoAccess = String(data.get("repoAccess") || "");
+
+  if (!form.checkValidity() || !name || !email || !serviceUrl) {
+    return null;
+  }
+
+  if (!allowedPlans.has(plan) || !allowedStatuses.has(status) || !allowedRepoAccess.has(repoAccess)) {
+    return null;
+  }
+
+  return {
+    name,
+    email,
+    url: serviceUrl,
+    repo: repoUrl,
+    repoAccess,
+    stack: String(data.get("stack") || "").trim() || "미입력",
+    plan,
+    status,
+    memo: String(data.get("memo") || "").trim(),
+    consent: {
+      owner: data.get("owner") === "on",
+      scope: data.get("scope") === "on",
+      terms: data.get("terms") === "on"
+    },
+    source: window.location.href
+  };
+}
+
+async function submitApplication(event) {
+  event.preventDefault();
+
+  form.classList.add("was-validated");
+  const payload = validateApplication();
+
+  if (!payload) {
     form.reportValidity();
+    setFormStatus("필수 항목, 이메일, URL 형식, 약관 동의를 확인해 주세요.", "error");
     return;
   }
 
-  const summary = {
-    name,
-    email,
-    url,
-    repo: String(data.get("repo") || "").trim() || "미제공",
-    stack: String(data.get("stack") || "").trim() || "미입력",
-    plan: data.get("plan"),
-    status: data.get("status"),
-    memo: String(data.get("memo") || "").trim() || "없음"
-  };
+  const endpoint = form.dataset.endpoint || defaultIntakeEndpoint;
+  const submitButton = form.querySelector(".submit-button");
+  const originalLabel = submitButton.textContent;
 
-  const subject = `[VibeSec Review 상담 요청] ${summary.name} / ${summary.plan}`;
-  const body = [
-    "VibeSec Review 상담 요청",
-    "",
-    `이름/닉네임: ${summary.name}`,
-    `회신 이메일: ${summary.email}`,
-    `서비스 URL: ${summary.url}`,
-    `GitHub repo: ${summary.repo}`,
-    `사용 기술: ${summary.stack}`,
-    `희망 상품: ${summary.plan}`,
-    `운영 상태: ${summary.status}`,
-    `요청 메모: ${summary.memo}`,
-    "",
-    "확인:",
-    "- 본인은 점검 대상의 소유자 또는 관리 권한자입니다.",
-    "- 합의된 범위 밖 테스트를 요청하지 않습니다."
-  ].join("\n");
+  submitButton.disabled = true;
+  submitButton.textContent = "전송 중";
+  setFormStatus("의뢰 내용을 접수 서버로 전송하고 있습니다.", "info");
 
-  window.location.href = `mailto:${intakeEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  formStatus.textContent = "메일 앱에서 상담 요청 초안을 확인해 주세요. 열리지 않으면 hello@vibesec.review로 보내면 됩니다.";
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
+      body: JSON.stringify(payload)
+    });
+
+    let result = {};
+    try {
+      result = await response.json();
+    } catch {
+      result = {};
+    }
+
+    if (!response.ok || result.ok === false) {
+      const message = result.code === "INTAKE_NOT_CONFIGURED" || response.status === 404
+        ? "접수 서버 설정이 필요합니다. 관리자에게 메일 발송 환경변수 설정을 요청해 주세요."
+        : `접수에 실패했습니다. ${contactEmail}로 직접 연락해 주세요.`;
+      throw new Error(message);
+    }
+
+    form.reset();
+    form.classList.remove("was-validated");
+    setFormStatus("의뢰가 접수됐습니다. 회신 이메일로 범위 확인 안내를 보냅니다.", "success");
+  } catch (error) {
+    setFormStatus(error.message || `접수 서버 오류입니다. ${contactEmail}로 직접 연락해 주세요.`, "error");
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = originalLabel;
+  }
 }
 
 document.querySelectorAll("[data-open-apply]").forEach((button) => {
@@ -181,6 +280,10 @@ issueButtons.forEach((button) => {
 });
 
 form.addEventListener("submit", submitApplication);
+
+form.addEventListener("input", () => {
+  if (form.classList.contains("was-validated")) validateApplication();
+});
 
 document.addEventListener("pointermove", (event) => {
   const x = (event.clientX / window.innerWidth - 0.5) * 10;

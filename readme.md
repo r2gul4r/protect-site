@@ -446,8 +446,8 @@ High / Medium / Low 리포트와 수정 가이드를 제공합니다.
 | --- | --- |
 | 프론트 | Next.js |
 | 스타일 | Tailwind CSS |
-| 신청폼 | 자체 폼 또는 외부 폼 |
-| 저장 | 처음엔 이메일/스프레드시트도 충분 |
+| 신청폼 | 자체 폼 + `/api/inquiries` 접수 API |
+| 저장 | 처음엔 이메일 접수와 수동 스프레드시트 기록 |
 | 배포 | Vercel 또는 Netlify 무료 플랜 후보 |
 | 리포트 | Markdown → PDF |
 | 자동화 | Codex CLI / GitHub repo 기반 |
@@ -458,13 +458,15 @@ High / Medium / Low 리포트와 수정 가이드를 제공합니다.
 ```text
 Next.js 랜딩페이지
 → 신청폼 제출
-→ 이메일로 접수
+→ 서버리스 API에서 이메일로 접수
 → Notion/Google Sheet에 수동 기록
 → Codex로 점검
 → Markdown 리포트 생성
 → PDF 변환
 → 이메일/DM으로 전달
 ```
+
+접수 API는 브라우저에 메일 서비스 키를 노출하지 않는다. 운영 배포에서는 `RESEND_API_KEY`, `INTAKE_FROM_EMAIL`, `INTAKE_TO_EMAIL` 환경변수를 서버에 설정한다.
 
 ---
 

@@ -1136,6 +1136,14 @@ label {
   font-weight: 740;
 }
 
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 input,
 select,
 textarea {
@@ -1153,6 +1161,13 @@ select:focus,
 textarea:focus {
   border-color: rgba(79, 202, 120, .75);
   box-shadow: 0 0 0 3px rgba(79, 202, 120, .13);
+}
+
+.was-validated input:invalid,
+.was-validated select:invalid,
+.was-validated textarea:invalid {
+  border-color: rgba(255, 81, 72, .88);
+  box-shadow: 0 0 0 3px rgba(255, 81, 72, .13);
 }
 
 textarea {
@@ -1181,6 +1196,16 @@ select option {
   accent-color: var(--green);
 }
 
+.terms-note {
+  padding: 12px 14px;
+  border: 1px solid rgba(79, 202, 120, .2);
+  border-radius: 6px;
+  color: #c8d3d6;
+  background: rgba(79, 202, 120, .08);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
 .submit-button {
   height: 48px;
   border: 0;
@@ -1191,6 +1216,11 @@ select option {
   font-weight: 880;
 }
 
+.submit-button:disabled {
+  cursor: wait;
+  opacity: .72;
+}
+
 .pulse {
   animation: pulse-ring .5s ease;
 }
@@ -1198,9 +1228,17 @@ select option {
 .form-status {
   min-height: 20px;
   margin: -2px 0 0;
-  color: var(--green-strong);
+  color: var(--muted);
   font-size: 13px;
   line-height: 1.45;
+}
+
+.form-status[data-state="success"] {
+  color: var(--green-strong);
+}
+
+.form-status[data-state="error"] {
+  color: #ff8b86;
 }
 
 .highlight-code {
