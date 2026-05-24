@@ -1,22 +1,22 @@
 # Current Task
 
-- task: 브라우저 코멘트에 따라 신청 모달에서 이용약관과 개인정보 처리 안내 더미 초안을 펼쳐볼 수 있게 한다.
+- task: 브라우저 코멘트에 따라 가격과 플랜을 낮추고 런칭 할인처럼 보이도록 조정한다.
 - phase: verification
 - status: complete
 
 # Orchestration Profile
 
-- score_total: 3
-- score_breakdown: consent_content_addition=2, local_browser_verification=1
-- hard_triggers: browser comment on missing terms/privacy content
+- score_total: 4
+- score_breakdown: pricing_positioning=2, public_copy_update=1, local_browser_verification=1
+- hard_triggers: browser comment on pricing positioning mismatch
 - selected_rules: spec-first, frontend implementation, local verification
 - selected_skills: none
-- selection_reason: 필수 동의 체크박스가 참조하는 이용약관과 개인정보 처리 안내 내용을 모달 안에서 확인할 수 있게 한다.
+- selection_reason: 현재 역량/시장 진입 단계에 맞게 가격 부담을 낮추고 공개 화면에는 런칭 할인 적용가로 자연스럽게 표현한다.
 - execution_topology: single-session
 - agent_budget: 0
 - efficiency_basis: 단일 모달 마크업/CSS 수정이라 분리 비용이 더 크다.
 - spawn_decision: no-spawn
-- reason: score_total 3이고 브라우저 코멘트가 동의 문구의 참조 콘텐츠에 한정되어 단일 세션에서 수정과 검증을 끝낸다.
+- reason: score_total 4이고 가격 섹션과 문서 가격표의 일관성 수정이라 단일 세션에서 수정과 검증을 끝낸다.
 
 # Writer Slot
 
@@ -36,14 +36,14 @@
 - contract_freeze: frozen
 - source: latest user request, README positioning, current static page
 - deliverables:
-  - Add expandable dummy terms content inside the application modal.
-  - Add expandable dummy privacy notice content inside the application modal.
-  - Keep required consent checkbox and form validation intact.
+  - Lower Basic, Standard, and Fix PR displayed prices.
+  - Add original price and launch discount visual treatment.
+  - Keep pricing copy honest without exposing internal confidence/experience wording.
   - Preserve Lucide SVG icon usage instead of handmade CSS/text icons.
 - risks:
-  - Do not present dummy legal text as finalized legal review.
-  - Do not regress modal form validation or submit behavior.
-  - Do not alter server-side intake behavior.
+  - Do not create misleading fake scarcity.
+  - Do not regress pricing layout on desktop/mobile.
+  - Keep README price references aligned with the page.
 
 # Reviewer
 
@@ -82,3 +82,5 @@
 - 2026-05-24 KST: Hid `.apply-modal-content` scrollbar while preserving internal scroll; in-app browser verified `canScroll=true` and hidden scrollbar styles.
 - 2026-05-24 KST: Reclassified for expandable dummy terms and privacy content in application modal; selected single-session targeted update.
 - 2026-05-24 KST: Added expandable dummy terms/privacy notices; in-app browser verified both disclosures open and required consent remains intact.
+- 2026-05-24 KST: Reclassified for launch-discount pricing adjustment; selected single-session targeted update.
+- 2026-05-24 KST: Lowered displayed prices to Basic 39k, Standard 99k, Fix PR 59k; added original-price strike-through and launch-discount badges; browser verification passed.
