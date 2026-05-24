@@ -1,22 +1,22 @@
 # Current Task
 
-- task: 제공된 메인페이지 이미지 시안을 정적 웹앱으로 클론하고 기능, 사운드 효과, 애니메이션, 마이크로 인터랙션을 추가한다.
+- task: 랜딩페이지를 실사용 수준의 콘텐츠와 상세 섹션으로 다듬고 불필요한 사운드/리포트 다운로드 데모를 제거한다.
 - phase: implementation
 - status: complete
 
 # Orchestration Profile
 
-- score_total: 8
-- score_breakdown: image_based_visual_clone=3, frontend_multi_file=2, interactions_audio=2, responsive_polish=1
-- hard_triggers: visual_fidelity_risk, ambiguous_acceptance_criteria
+- score_total: 7
+- score_breakdown: production_content=3, frontend_multi_section=2, ux_surface_reduction=1, security_wording=1
+- hard_triggers: security service wording and application-form trust surface
 - selected_rules: spec-first, frontend implementation, local verification
 - selected_skills: none
-- selection_reason: 첨부 이미지 기반 메인페이지를 코드로 구현하고 동작/사운드/애니메이션을 붙이는 프론트엔드 작업이다.
+- selection_reason: MVP 사이트를 실제 의뢰 접수용으로 보이게 만들고 불필요한 데모 기능을 제거하는 프론트엔드/콘텐츠 작업이다.
 - execution_topology: single-session
 - agent_budget: 0
-- efficiency_basis: 현재 사용자 요청에 subagent standing authorization이 없고, 구현 write set이 하나의 정적 앱으로 강하게 결합되어 있다.
-- spawn_decision: no-spawn; single cohesive static site and no current standing authorization for subagents.
-- reason: score_total 8이지만 분리 가능한 독립 write set보다 hero/layout/script 통합 조정 비용이 크므로 단일 세션에서 구현 후 로컬 검증한다.
+- efficiency_basis: 콘텐츠, 스타일, JS 정리가 같은 페이지 흐름에 묶여 있어 분리 비용이 더 크다.
+- spawn_decision: no-spawn
+- reason: score_total 7이나 write set이 하나의 정적 사이트 흐름이고 독립 구현 slice가 뚜렷하지 않아 단일 세션으로 진행한다.
 
 # Writer Slot
 
@@ -27,30 +27,27 @@
   - `index.html`: static landing page UI
   - `styles.css`: visual clone, responsive layout, animation styling
   - `script.js`: interactions, sound effects, micro interactions
-  - `.gitignore`: local verification artifacts
-  - `PLAN.md`: keep existing MVP decision notes
-  - `ERROR_LOG.md`: resolved verification route errors
+  - `PLAN.md`: implementation plan note if product scope changes
 
 # Contract Freeze
 
 - contract_freeze: frozen
-- source: attached homepage image and user request
+- source: latest user request, README positioning, current static page
 - deliverables:
-  - Build a close static HTML/CSS/JS clone of the provided VibeSec Review main page.
-  - Preserve the visible structure: dark nav, hero copy, CTA, service category strip, risk cards, code review preview, issue list, and next white section.
-  - Add useful functionality: smooth nav, CTA/application modal, report download simulation, checklist interactions, issue filtering/highlighting.
-  - Add sound effects gated by user interaction plus mute toggle.
-  - Use sourced SVG icon set icons instead of hand-made CSS/text icons.
-  - Add appropriate animations and micro interactions without adding login, signup, dashboard, payment, DB, or Google integration.
+  - Remove header sound control and all Web Audio/sound-effect behavior.
+  - Remove fake report download behavior; replace with a realistic sample/report structure preview.
+  - Expand sections so the page reads like an actual service page: review scope, deliverables, process, pricing, FAQ, application CTA.
+  - Keep no-login/no-dashboard/no-payment/no-Google-integration MVP boundary.
+  - Preserve Lucide SVG icon usage instead of handmade CSS/text icons.
 - risks:
-  - Pixel-perfect cannot be mathematically exact without the original design assets and font metrics.
-  - Browser audio requires user gesture before playback.
-  - Do not introduce external runtime dependencies or secret-bearing integrations.
+  - Do not imply unauthorized scanning or offensive testing.
+  - Do not create fake customer data, fake downloads, or backend behavior that does not exist.
+  - Do not introduce secrets or external integrations.
 
 # Reviewer
 
 - review_required: self-review only
-- review_reason: visual/static frontend task; verify file load and interactions locally
+- review_reason: static frontend and security-service content wording
 
 # Last Update
 
@@ -65,3 +62,6 @@
 - 2026-05-24 KST: Replaced hand-made CSS/text icons with Lucide-sourced inline SVG icons; Chrome preview verified SVG rendering and no text-symbol icon leakage.
 - 2026-05-24 KST: Verification path settled on Chrome extension with localhost static server; JS syntax and Chrome render checks passed.
 - 2026-05-24 KST: Commit `1d7e2a8` pushed to `origin/main`; implementation task complete.
+- 2026-05-24 KST: Reclassified for production content pass; remove sound/download demo and expand service sections.
+- 2026-05-24 KST: Removed sound and fake report download; expanded scope, deliverable, pricing, process, FAQ, and apply sections; Chrome verification passed.
+- 2026-05-24 KST: Static checks passed; ready to commit and push production content pass.

@@ -1,4 +1,3 @@
-const soundToggle = document.querySelector(".sound-toggle");
 const modal = document.querySelector("#applyModal");
 const toast = document.querySelector("#toast");
 const form = document.querySelector("#applyForm");
@@ -6,11 +5,9 @@ const issueButtons = [...document.querySelectorAll(".issue-list button")];
 const railItems = [...document.querySelectorAll(".rail-item")];
 const riskCards = [...document.querySelectorAll(".risk-card")];
 const codePanel = document.querySelector(".code-panel");
-const reportButton = document.querySelector("#downloadReport");
 
-let soundEnabled = false;
-let audioContext;
 let toastTimer;
+const intakeEmail = "hello@vibesec.review";
 
 const scopeCopy = {
   basic: "Basic Review 항목 전체를 기준으로 요약했습니다.",
@@ -20,42 +17,10 @@ const scopeCopy = {
   secret: "Secret 노출 가능성과 환경변수 관리 항목을 강조했습니다."
 };
 
-function ensureAudio() {
-  if (!audioContext) {
-    audioContext = new AudioContext();
-  }
-  if (audioContext.state === "suspended") {
-    audioContext.resume();
-  }
-}
-
-function beep(type = "tap") {
-  if (!soundEnabled) return;
-  ensureAudio();
-
-  const now = audioContext.currentTime;
-  const oscillator = audioContext.createOscillator();
-  const gain = audioContext.createGain();
-  const frequency = type === "success" ? 720 : type === "warn" ? 260 : 520;
-
-  oscillator.type = type === "warn" ? "sawtooth" : "sine";
-  oscillator.frequency.setValueAtTime(frequency, now);
-  oscillator.frequency.exponentialRampToValueAtTime(frequency * 1.22, now + 0.08);
-  gain.gain.setValueAtTime(0.0001, now);
-  gain.gain.exponentialRampToValueAtTime(type === "warn" ? 0.055 : 0.035, now + 0.012);
-  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
-
-  oscillator.connect(gain);
-  gain.connect(audioContext.destination);
-  oscillator.start(now);
-  oscillator.stop(now + 0.13);
-}
-
-function showToast(message, type = "tap") {
+function showToast(message) {
   clearTimeout(toastTimer);
   toast.textContent = message;
   toast.classList.add("show");
-  beep(type);
   toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
 }
 
@@ -69,7 +34,6 @@ function openModal() {
 function closeModal() {
   modal.hidden = true;
   document.body.style.overflow = "";
-  beep("tap");
 }
 
 function activateRail(item) {
@@ -91,28 +55,7 @@ function activateIssue(button) {
     : severity === "warn"
       ? "개선 항목: PUBLIC 변수 사용을 검토합니다."
       : "주의 항목: 권한과 하드코딩 가능성을 확인합니다.";
-  showToast(message, severity === "high" ? "warn" : "tap");
-}
-
-function downloadReport() {
-  const reportText = [
-    "VibeSec Review Sample Report",
-    "",
-    "요약",
-    "- 심각: Secret 노출 가능성 1건",
-    "- 주의: DB 권한/하드코딩 가능성 2건",
-    "- 개선: PUBLIC 변수 사용 검토 1건",
-    "",
-    "주의: 이 파일은 데모용 샘플입니다."
-  ].join("\n");
-  const blob = new Blob([reportText], { type: "text/plain;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const anchor = document.createElement("a");
-  anchor.href = url;
-  anchor.download = "report_2024-05-20-demo.txt";
-  anchor.click();
-  URL.revokeObjectURL(url);
-  showToast("샘플 리포트 다운로드를 생성했습니다.", "success");
+  showToast(message);
 }
 
 function submitApplication(event) {
@@ -125,7 +68,6 @@ function submitApplication(event) {
 
   if (!form.checkValidity() || !name || !email || !url) {
     form.reportValidity();
-    beep("warn");
     return;
   }
 
@@ -133,27 +75,36 @@ function submitApplication(event) {
     name,
     email,
     url,
-    plan: data.get("plan")
+    repo: String(data.get("repo") || "").trim() || "미제공",
+    stack: String(data.get("stack") || "").trim() || "미입력",
+    plan: data.get("plan"),
+    status: data.get("status"),
+    memo: String(data.get("memo") || "").trim() || "없음"
   };
 
-  console.info("VibeSec Review demo application", summary);
+  const subject = `[VibeSec Review 상담 요청] ${summary.name} / ${summary.plan}`;
+  const body = [
+    "VibeSec Review 상담 요청",
+    "",
+    `이름/닉네임: ${summary.name}`,
+    `회신 이메일: ${summary.email}`,
+    `서비스 URL: ${summary.url}`,
+    `GitHub repo: ${summary.repo}`,
+    `사용 기술: ${summary.stack}`,
+    `희망 상품: ${summary.plan}`,
+    `운영 상태: ${summary.status}`,
+    `요청 메모: ${summary.memo}`,
+    "",
+    "확인:",
+    "- 본인은 점검 대상의 소유자 또는 관리 권한자입니다.",
+    "- 합의된 범위 밖 테스트를 요청하지 않습니다."
+  ].join("\n");
+
+  window.location.href = `mailto:${intakeEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   closeModal();
   form.reset();
-  showToast("상담 요청 데모가 생성됐습니다. 실제 전송은 다음 단계에서 이메일 연동으로 붙입니다.", "success");
+  showToast("메일 앱에서 상담 요청 초안을 확인해 주세요.");
 }
-
-soundToggle.addEventListener("click", () => {
-  soundEnabled = !soundEnabled;
-  soundToggle.setAttribute("aria-pressed", String(soundEnabled));
-  soundToggle.setAttribute("aria-label", soundEnabled ? "사운드 끄기" : "사운드 켜기");
-  if (soundEnabled) {
-    ensureAudio();
-    beep("success");
-    showToast("사운드 효과가 켜졌습니다.", "success");
-  } else {
-    showToast("사운드 효과가 꺼졌습니다.");
-  }
-});
 
 document.querySelectorAll("[data-open-apply]").forEach((button) => {
   button.addEventListener("click", openModal);
@@ -187,12 +138,7 @@ issueButtons.forEach((button) => {
   button.addEventListener("click", () => activateIssue(button));
 });
 
-reportButton.addEventListener("click", downloadReport);
 form.addEventListener("submit", submitApplication);
-
-document.querySelectorAll("a[href^='#']").forEach((link) => {
-  link.addEventListener("click", () => beep("tap"));
-});
 
 document.addEventListener("pointermove", (event) => {
   const x = (event.clientX / window.innerWidth - 0.5) * 10;

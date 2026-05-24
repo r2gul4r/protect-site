@@ -23,17 +23,10 @@
         <nav class="nav-links" aria-label="페이지 섹션">
           <a href="#service">서비스 소개</a>
           <a href="#review">리뷰 항목</a>
+          <a href="#pricing">가격</a>
           <a href="#process">프로세스</a>
           <a href="#faq">FAQ</a>
         </nav>
-
-        <button class="sound-toggle" type="button" aria-label="사운드 켜기" aria-pressed="false">
-          <svg class="lucide sound-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path>
-            <path d="M16 9a5 5 0 0 1 0 6"></path>
-            <path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path>
-          </svg>
-        </button>
       </header>
 
       <main>
@@ -98,7 +91,7 @@
               <h1 id="hero-title">AI 앱 출시 전<br>보안 설정 리뷰</h1>
               <p>VibeSec Review는 AI로 개발된 웹 앱의 보안 설정을<br>한국의 실제 서비스 운영 기준에 맞춰 검토해 드립니다.</p>
               <button class="primary-cta" type="button" data-open-apply>
-                의뢰하기
+                무료 사전 상담
                 <svg class="lucide cta-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
               </button>
             </div>
@@ -156,9 +149,8 @@
                 </div>
                 <div class="latest-report">
                   <svg class="lucide doc-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
-                  <span>최근 검토 리포트</span>
-                  <button type="button" id="downloadReport">report_2024-05-20.pdf</button>
-                  <small>(다운로드)</small>
+                  <span>리포트 구성</span>
+                  <a href="#sample-report">요약 · 발견 항목 · 수정 우선순위 미리보기</a>
                 </div>
               </section>
 
@@ -194,25 +186,146 @@
           </div>
         </section>
 
+        <section class="scope-section content-section" id="scope" aria-labelledby="scope-title">
+          <div class="section-heading">
+            <span class="section-kicker">Review Scope</span>
+            <h2 id="scope-title">AI로 만든 웹앱에서 자주 터지는 지점을 먼저 봅니다</h2>
+            <p>Lovable, v0, Cursor, Codex, Bolt 등으로 빠르게 만든 앱은 기능은 빨리 나오지만 인증, API, DB 권한, 환경변수에서 운영 사고가 나기 쉽습니다.</p>
+          </div>
+          <div class="scope-grid">
+            <article>
+              <h3>인증·세션</h3>
+              <p>로그인 흐름, 토큰 저장 위치, 로그아웃 처리, 테스트 계정 권한을 확인합니다.</p>
+            </article>
+            <article>
+              <h3>권한·DB Rules</h3>
+              <p>Supabase RLS, Firebase Rules, owner_id 검증, 공개 bucket 설정을 봅니다.</p>
+            </article>
+            <article>
+              <h3>API·CORS</h3>
+              <p>민감 API 노출, 과도한 응답 데이터, CORS 허용 범위, rate limit 필요성을 정리합니다.</p>
+            </article>
+            <article>
+              <h3>Secret·환경변수</h3>
+              <p>클라이언트 노출 키, service role key, GitHub 공개 repo의 민감정보 흔적을 점검합니다.</p>
+            </article>
+            <article>
+              <h3>파일·스토리지</h3>
+              <p>업로드 확장자, 공개 URL, 다운로드 권한, 개인정보 파일 노출 가능성을 확인합니다.</p>
+            </article>
+            <article>
+              <h3>배포·의존성</h3>
+              <p>보안 헤더, HTTPS, admin route, dependency 취약점, 로그의 민감정보 노출을 봅니다.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="report-section content-section" id="sample-report" aria-labelledby="report-title">
+          <div class="section-heading">
+            <span class="section-kicker">Deliverable</span>
+            <h2 id="report-title">샘플 파일보다 실제 전달물 구조를 먼저 보여줍니다</h2>
+            <p>리포트는 과장된 공격 시연이 아니라 운영자가 바로 고칠 수 있는 우선순위와 근거 중심으로 정리합니다.</p>
+          </div>
+          <div class="report-layout">
+            <div class="report-outline">
+              <h3>리포트에 포함되는 것</h3>
+              <ul>
+                <li>점검 대상, 합의 범위, 제외 범위</li>
+                <li>High / Medium / Low 요약표</li>
+                <li>발견 항목별 영향, 근거, 수정 가이드</li>
+                <li>재점검 체크리스트와 남은 리스크</li>
+                <li>고객에게 설명 가능한 쉬운 요약</li>
+              </ul>
+            </div>
+            <div class="finding-preview">
+              <span class="severity-pill high">High</span>
+              <h3>JWT Secret 기본값 사용 가능성</h3>
+              <p>환경변수 예시와 설정 파일에서 운영 secret이 기본값 또는 노출 가능한 형태로 관리되는지 확인합니다.</p>
+              <dl>
+                <div><dt>영향</dt><dd>토큰 위조 또는 세션 신뢰성 저하 가능성</dd></div>
+                <div><dt>권장</dt><dd>운영 secret 재발급, 저장소 이력 점검, 배포 환경변수 분리</dd></div>
+                <div><dt>주의</dt><dd>실제 악용 절차는 리포트에 과하게 적지 않습니다.</dd></div>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <section class="pricing-section content-section" id="pricing" aria-labelledby="pricing-title">
+          <div class="section-heading">
+            <span class="section-kicker">Pricing</span>
+            <h2 id="pricing-title">처음엔 가볍게, 필요할 때만 깊게</h2>
+            <p>초기 MVP는 카드결제 없이 상담 후 계좌이체, PayPal, 플랫폼 에스크로로 진행합니다.</p>
+          </div>
+          <div class="pricing-grid">
+            <article>
+              <span>Basic</span>
+              <h3>99,000원</h3>
+              <p>공개 URL, repo, 설정 중심의 비침투형 1차 점검.</p>
+              <ul>
+                <li>보안 헤더와 배포 설정</li>
+                <li>Secret 노출 흔적</li>
+                <li>인증·API 흐름 간단 리뷰</li>
+              </ul>
+            </article>
+            <article class="featured-plan">
+              <span>Standard</span>
+              <h3>249,000원</h3>
+              <p>테스트 계정과 합의된 범위 안에서 앱 흐름까지 확인.</p>
+              <ul>
+                <li>Basic 전체 포함</li>
+                <li>권한·DB Rules 집중 검토</li>
+                <li>재현 조건과 수정 우선순위</li>
+              </ul>
+            </article>
+            <article>
+              <span>Fix PR</span>
+              <h3>149,000원~</h3>
+              <p>리포트 이후 고객 승인 범위에서 패치 또는 PR 초안 제공.</p>
+              <ul>
+                <li>수정안 작성</li>
+                <li>테스트 체크리스트</li>
+                <li>고객 최종 승인 후 반영</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
         <section class="process-section" id="process" aria-labelledby="process-title">
           <h2 id="process-title">VibeSec Review는 이렇게 진행됩니다</h2>
           <div class="process-grid">
             <article>
               <span>1</span>
-              <h3>범위 확인</h3>
-              <p>소유자 승인 여부와 점검 제외 범위를 먼저 고정합니다.</p>
+              <h3>사전 상담</h3>
+              <p>서비스 URL, repo 접근 방식, 운영 상태, 개인정보 처리 여부를 확인합니다.</p>
             </article>
             <article>
               <span>2</span>
-              <h3>설정 리뷰</h3>
-              <p>인증, API, DB 권한, Secret, 배포 설정을 확인합니다.</p>
+              <h3>권한·범위 확정</h3>
+              <p>소유자 또는 관리 권한자 확인과 금지 행위를 명확히 합의합니다.</p>
             </article>
             <article>
               <span>3</span>
+              <h3>코드·설정 리뷰</h3>
+              <p>인증, API, DB 권한, Secret, 배포 설정을 항목별로 점검합니다.</p>
+            </article>
+            <article>
+              <span>4</span>
               <h3>리포트 전달</h3>
-              <p>High / Medium / Low 기준으로 수정 우선순위를 정리합니다.</p>
+              <p>High / Medium / Low 기준으로 수정 우선순위와 재점검 기준을 전달합니다.</p>
             </article>
           </div>
+        </section>
+
+        <section class="apply-section" aria-labelledby="apply-section-title">
+          <div>
+            <span class="section-kicker">Apply</span>
+            <h2 id="apply-section-title">로그인 없이, 먼저 범위부터 확인합니다</h2>
+            <p>신청폼은 계정 생성이 아니라 상담 메일 초안을 만드는 용도입니다. 실제 자동 접수 이메일 연동은 다음 단계에서 붙입니다.</p>
+          </div>
+          <button class="primary-cta" type="button" data-open-apply>
+            상담 요청 작성
+            <svg class="lucide cta-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          </button>
         </section>
 
         <section class="faq-section" id="faq" aria-labelledby="faq-title">
@@ -225,6 +338,18 @@
             <summary>로그인이나 회원가입이 필요한가요?</summary>
             <p>초기 MVP에서는 필요 없습니다. 신청폼으로 의뢰 내용을 보내고 이메일로 접수합니다.</p>
           </details>
+          <details>
+            <summary>제출하면 바로 자동 점검이 시작되나요?</summary>
+            <p>아니요. 먼저 권한과 점검 범위를 확인한 뒤 진행합니다. 무단 스캔이나 대량 요청은 하지 않습니다.</p>
+          </details>
+          <details>
+            <summary>Google Sheets나 고객 대시보드는 없나요?</summary>
+            <p>MVP에서는 없습니다. 반복 접수가 확인되면 이메일 접수를 Google Sheet나 Notion에 자동 기록하는 방식부터 검토합니다.</p>
+          </details>
+          <details>
+            <summary>리포트는 어떤 형태로 받나요?</summary>
+            <p>상담과 결제 후 Markdown 또는 PDF 형태로 전달합니다. 샘플은 페이지에서 구조만 보여주고 임의 다운로드는 제공하지 않습니다.</p>
+          </details>
         </section>
       </main>
     </div>
@@ -233,7 +358,7 @@
       <div class="apply-modal">
         <button class="modal-close" type="button" aria-label="닫기" data-close-modal>×</button>
         <h2 id="applyTitle">의뢰 신청</h2>
-        <p>초기 MVP는 계정 없이 이메일로 상담 요청을 접수합니다.</p>
+        <p>입력 내용으로 상담 메일 초안을 만듭니다. 자동 전송이나 저장은 아직 하지 않습니다.</p>
         <form id="applyForm" novalidate>
           <label>
             이름/닉네임
@@ -248,12 +373,32 @@
             <input name="url" type="url" required placeholder="https://example.com">
           </label>
           <label>
+            GitHub repo
+            <input name="repo" type="text" placeholder="공개 repo URL 또는 비공개 여부">
+          </label>
+          <label>
+            사용 기술
+            <input name="stack" type="text" placeholder="Next.js, Supabase, Firebase 등">
+          </label>
+          <label>
             점검 상품
             <select name="plan" required>
               <option value="Basic Review">Basic Review</option>
               <option value="Standard Review">Standard Review</option>
               <option value="Fix PR Add-on">Fix PR Add-on</option>
             </select>
+          </label>
+          <label>
+            운영 상태
+            <select name="status" required>
+              <option value="개발중">개발중</option>
+              <option value="스테이징">스테이징</option>
+              <option value="운영중">운영중</option>
+            </select>
+          </label>
+          <label>
+            요청 메모
+            <textarea name="memo" rows="3" placeholder="걱정되는 부분, 테스트 계정 제공 가능 여부, 개인정보 처리 여부"></textarea>
           </label>
           <label class="checkbox-line">
             <input name="owner" type="checkbox" required>
@@ -263,7 +408,7 @@
             <input name="scope" type="checkbox" required>
             <span>합의된 범위 밖 테스트를 요청하지 않습니다.</span>
           </label>
-          <button class="submit-button" type="submit">상담 요청 생성</button>
+          <button class="submit-button" type="submit">상담 메일 초안 만들기</button>
         </form>
       </div>
     </div>
