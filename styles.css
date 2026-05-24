@@ -1081,8 +1081,8 @@ details p {
   position: relative;
   width: min(560px, 100%);
   max-height: min(820px, calc(100vh - 40px));
-  overflow: auto;
-  padding: 30px;
+  overflow: hidden;
+  padding: 0;
   border: 1px solid rgba(255, 255, 255, .16);
   border-radius: 10px;
   background: #11191d;
@@ -1090,10 +1090,18 @@ details p {
   animation: pop-in .18s ease both;
 }
 
+.apply-modal-content {
+  max-height: min(820px, calc(100vh - 40px));
+  overflow: auto;
+  padding: 30px;
+  scrollbar-gutter: stable;
+}
+
 .modal-close {
   position: absolute;
   top: 15px;
   right: 17px;
+  z-index: 3;
   display: grid;
   place-items: center;
   width: 36px;

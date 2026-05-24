@@ -380,79 +380,81 @@
             <path d="m6 6 12 12"></path>
           </svg>
         </button>
-        <h2 id="applyTitle">의뢰 신청</h2>
-        <p>입력 내용을 검증한 뒤 의뢰 메일로 바로 접수합니다. 접수 후 회신 이메일로 범위 확인과 결제 안내를 보냅니다.</p>
-        <form id="applyForm" data-endpoint="/api/inquiries" novalidate>
-          <label class="honeypot" aria-hidden="true">
-            회사명
-            <input name="company" type="text" tabindex="-1" autocomplete="off">
-          </label>
-          <label>
-            이름/닉네임
-            <input name="name" type="text" autocomplete="name" minlength="2" maxlength="80" required placeholder="홍길동">
-          </label>
-          <label>
-            이메일
-            <input name="email" type="email" autocomplete="email" inputmode="email" maxlength="160" required placeholder="hello@example.com">
-          </label>
-          <label>
-            서비스 URL
-            <input name="url" type="url" inputmode="url" maxlength="240" required placeholder="https://example.com">
-          </label>
-          <label>
-            GitHub repo URL
-            <input name="repo" type="url" inputmode="url" maxlength="240" placeholder="https://github.com/name/repo">
-          </label>
-          <label>
-            Repo 접근 방식
-            <select name="repoAccess" required>
-              <option value="공개 repo">공개 repo</option>
-              <option value="비공개 repo 초대 가능">비공개 repo 초대 가능</option>
-              <option value="repo 제공 불가">repo 제공 불가</option>
-            </select>
-          </label>
-          <label>
-            사용 기술
-            <input name="stack" type="text" maxlength="160" placeholder="Next.js, Supabase, Firebase 등">
-          </label>
-          <label>
-            점검 상품
-            <select name="plan" required>
-              <option value="Basic Review">Basic Review</option>
-              <option value="Standard Review">Standard Review</option>
-              <option value="Fix PR Add-on">Fix PR Add-on</option>
-            </select>
-          </label>
-          <label>
-            운영 상태
-            <select name="status" required>
-              <option value="개발중">개발중</option>
-              <option value="스테이징">스테이징</option>
-              <option value="운영중">운영중</option>
-            </select>
-          </label>
-          <label>
-            요청 메모
-            <textarea name="memo" rows="3" maxlength="1000" placeholder="걱정되는 부분, 테스트 계정 제공 가능 여부, 개인정보 처리 여부"></textarea>
-          </label>
-          <label class="checkbox-line">
-            <input name="owner" type="checkbox" required>
-            <span>본인은 점검 대상의 소유자 또는 관리 권한자입니다.</span>
-          </label>
-          <label class="checkbox-line">
-            <input name="scope" type="checkbox" required>
-            <span>합의된 범위 밖 테스트를 요청하지 않습니다.</span>
-          </label>
-          <div class="terms-note" id="applyTerms">
-            입력한 정보는 상담 접수, 권한 확인, 점검 범위 협의 목적으로만 사용합니다. 민감한 비밀번호, API 키, 주민등록번호는 보내지 마세요.
-          </div>
-          <label class="checkbox-line">
-            <input name="terms" type="checkbox" required aria-describedby="applyTerms">
-            <span>이용약관과 개인정보 처리 안내에 동의합니다.</span>
-          </label>
-          <button class="submit-button" type="submit">의뢰 메일 보내기</button>
-          <p class="form-status" id="formStatus" aria-live="polite"></p>
-        </form>
+        <div class="apply-modal-content">
+          <h2 id="applyTitle">의뢰 신청</h2>
+          <p>입력 내용을 검증한 뒤 의뢰 메일로 바로 접수합니다. 접수 후 회신 이메일로 범위 확인과 결제 안내를 보냅니다.</p>
+          <form id="applyForm" data-endpoint="/api/inquiries" novalidate>
+            <label class="honeypot" aria-hidden="true">
+              회사명
+              <input name="company" type="text" tabindex="-1" autocomplete="off">
+            </label>
+            <label>
+              이름/닉네임
+              <input name="name" type="text" autocomplete="name" minlength="2" maxlength="80" required placeholder="홍길동">
+            </label>
+            <label>
+              이메일
+              <input name="email" type="email" autocomplete="email" inputmode="email" maxlength="160" required placeholder="hello@example.com">
+            </label>
+            <label>
+              서비스 URL
+              <input name="url" type="url" inputmode="url" maxlength="240" required placeholder="https://example.com">
+            </label>
+            <label>
+              GitHub repo URL
+              <input name="repo" type="url" inputmode="url" maxlength="240" placeholder="https://github.com/name/repo">
+            </label>
+            <label>
+              Repo 접근 방식
+              <select name="repoAccess" required>
+                <option value="공개 repo">공개 repo</option>
+                <option value="비공개 repo 초대 가능">비공개 repo 초대 가능</option>
+                <option value="repo 제공 불가">repo 제공 불가</option>
+              </select>
+            </label>
+            <label>
+              사용 기술
+              <input name="stack" type="text" maxlength="160" placeholder="Next.js, Supabase, Firebase 등">
+            </label>
+            <label>
+              점검 상품
+              <select name="plan" required>
+                <option value="Basic Review">Basic Review</option>
+                <option value="Standard Review">Standard Review</option>
+                <option value="Fix PR Add-on">Fix PR Add-on</option>
+              </select>
+            </label>
+            <label>
+              운영 상태
+              <select name="status" required>
+                <option value="개발중">개발중</option>
+                <option value="스테이징">스테이징</option>
+                <option value="운영중">운영중</option>
+              </select>
+            </label>
+            <label>
+              요청 메모
+              <textarea name="memo" rows="3" maxlength="1000" placeholder="걱정되는 부분, 테스트 계정 제공 가능 여부, 개인정보 처리 여부"></textarea>
+            </label>
+            <label class="checkbox-line">
+              <input name="owner" type="checkbox" required>
+              <span>본인은 점검 대상의 소유자 또는 관리 권한자입니다.</span>
+            </label>
+            <label class="checkbox-line">
+              <input name="scope" type="checkbox" required>
+              <span>합의된 범위 밖 테스트를 요청하지 않습니다.</span>
+            </label>
+            <div class="terms-note" id="applyTerms">
+              입력한 정보는 상담 접수, 권한 확인, 점검 범위 협의 목적으로만 사용합니다. 민감한 비밀번호, API 키, 주민등록번호는 보내지 마세요.
+            </div>
+            <label class="checkbox-line">
+              <input name="terms" type="checkbox" required aria-describedby="applyTerms">
+              <span>이용약관과 개인정보 처리 안내에 동의합니다.</span>
+            </label>
+            <button class="submit-button" type="submit">의뢰 메일 보내기</button>
+            <p class="form-status" id="formStatus" aria-live="polite"></p>
+          </form>
+        </div>
       </div>
     </div>
     <script src="script.js"></script>

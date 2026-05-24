@@ -1,22 +1,22 @@
 # Current Task
 
-- task: 브라우저 코멘트에 따라 신청 모달에 약관 동의, 입력 형식 검증, 새 창 없는 의뢰 접수 흐름을 추가한다.
+- task: 브라우저 코멘트에 따라 신청 모달 내부 스크롤 중에도 닫기 버튼 위치가 유지되도록 수정한다.
 - phase: verification
 - status: complete
 
 # Orchestration Profile
 
-- score_total: 7
-- score_breakdown: form_validation=2, consent_capture=2, submission_flow_change=2, local_browser_verification=1
-- hard_triggers: user input boundary, external submission boundary, consent requirement
-- selected_rules: spec-first, frontend implementation, security validation, local verification
+- score_total: 2
+- score_breakdown: targeted_modal_ux_fix=1, local_browser_verification=1
+- hard_triggers: browser comment on close button scroll behavior
+- selected_rules: spec-first, frontend implementation, local verification
 - selected_skills: none
-- selection_reason: 신청폼이 사용자 입력을 받고 외부 접수 API로 전송될 수 있으므로 브라우저 검증, 약관 동의, 안전한 실패 처리를 함께 추가한다.
+- selection_reason: 모달 콘텐츠 스크롤 시 닫기 버튼이 함께 이동하지 않도록 스크롤 영역과 고정 컨트롤을 분리한다.
 - execution_topology: single-session
 - agent_budget: 0
-- efficiency_basis: 변경 범위가 하나의 모달 폼과 해당 JS/CSS에 집중되어 write set 분리보다 통합 수정이 안전하다.
+- efficiency_basis: 단일 모달 마크업/CSS 수정이라 분리 비용이 더 크다.
 - spawn_decision: no-spawn
-- reason: score_total 7이지만 backend가 없는 정적 사이트에서 프론트 검증과 API 제출 계약을 한 컴포넌트에 묶어 수정해야 하므로 단일 세션에서 구현과 검증을 끝낸다.
+- reason: score_total 2이고 브라우저 코멘트가 닫기 버튼 sticky 동작에 한정되어 단일 세션에서 수정과 검증을 끝낸다.
 
 # Writer Slot
 
@@ -36,17 +36,14 @@
 - contract_freeze: frozen
 - source: latest user request, README positioning, current static page
 - deliverables:
-  - Add required terms, authority, and privacy consent checkbox.
-  - Enforce email and URL format validation before submission.
-  - Replace `mailto:` new-window/client behavior with same-page async submit to a configurable intake endpoint.
-  - Fail safely when no backend endpoint is configured, without pretending that mail was sent.
+  - Keep the close button visually fixed while modal content scrolls.
+  - Preserve modal sizing, internal scrolling, and existing close behavior.
+  - Avoid covering form labels or inputs with the close button.
   - Preserve Lucide SVG icon usage instead of handmade CSS/text icons.
 - risks:
-  - Do not hardcode secrets or private mail service credentials in frontend code.
-  - Do not claim a request was sent when no backend endpoint accepted it.
-  - Do not leak raw stack traces or internal paths in user-facing errors.
-  - Do not imply unauthorized scanning or offensive testing.
-  - Do not introduce secrets or external integrations without explicit configuration.
+  - Do not regress modal form validation or submit behavior.
+  - Do not create overlapping controls on narrow viewports.
+  - Do not alter server-side intake behavior.
 
 # Reviewer
 
@@ -79,3 +76,5 @@
 - 2026-05-24 KST: Expanded write set to include `api/inquiries.js` because direct email sending must happen server-side, not from frontend secrets.
 - 2026-05-24 KST: Expanded docs write set to include README/PLAN intake notes for server-side email environment variables.
 - 2026-05-24 KST: Added required consent, email/URL validation, same-page fetch submission, and server-side Resend dispatch endpoint; static and browser checks passed.
+- 2026-05-24 KST: Reclassified for modal close button scroll persistence; selected single-session targeted update.
+- 2026-05-24 KST: Split modal scroll into `.apply-modal-content`; close button stays on the modal frame while internal content scrolls.
