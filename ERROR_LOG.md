@@ -22,4 +22,4 @@
 - location: `D:\git\protect-site(semi)`
 - summary: `git push -u origin main` was rejected by GitHub GH007 email privacy protection.
 - details: The commit used the local public email address, so GitHub refused to publish it.
-- status: open, pending local repo email change to GitHub noreply and commit amend.
+- status: resolved by setting local repo identity to `r2gul4r <r2gul4r@users.noreply.github.com>`, amending the commit, and pushing `main`.
