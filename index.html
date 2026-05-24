@@ -96,56 +96,74 @@
               </button>
             </div>
 
-            <div class="review-rail" id="review" aria-label="리뷰 항목 선택">
-              <button class="rail-item active" type="button" data-scope="basic">
-                <span>Basic Review</span>
-              </button>
-              <button class="rail-item" type="button" data-scope="auth">
-                <svg class="lucide icon ok" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
-                인증
-              </button>
-              <button class="rail-item" type="button" data-scope="api">
-                <svg class="lucide icon ok" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
-                API
-              </button>
-              <button class="rail-item" type="button" data-scope="db">
-                <svg class="lucide icon warn" viewBox="0 0 24 24" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
-                DB 권한
-              </button>
-              <button class="rail-item" type="button" data-scope="secret">
-                <svg class="lucide icon danger" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg>
-                Secret 노출
-              </button>
+            <div class="review-preview-block" id="review">
+              <div class="preview-heading">
+                <span>Review Preview</span>
+                <p>Basic Review에서 먼저 확인하는 핵심 항목입니다.</p>
+              </div>
+              <div class="review-rail" role="tablist" aria-label="리뷰 항목 미리보기">
+                <button class="rail-item active" id="tab-basic" role="tab" aria-selected="true" aria-controls="reviewContext" type="button" data-scope="basic">
+                  <span>전체 범위</span>
+                </button>
+                <button class="rail-item" id="tab-auth" role="tab" aria-selected="false" aria-controls="reviewContext" type="button" data-scope="auth">
+                  <svg class="lucide icon ok" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                  인증
+                </button>
+                <button class="rail-item" id="tab-api" role="tab" aria-selected="false" aria-controls="reviewContext" type="button" data-scope="api">
+                  <svg class="lucide icon ok" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                  API
+                </button>
+                <button class="rail-item" id="tab-db" role="tab" aria-selected="false" aria-controls="reviewContext" type="button" data-scope="db">
+                  <svg class="lucide icon warn" viewBox="0 0 24 24" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
+                  DB 권한
+                </button>
+                <button class="rail-item" id="tab-secret" role="tab" aria-selected="false" aria-controls="reviewContext" type="button" data-scope="secret">
+                  <svg class="lucide icon danger" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg>
+                  Secret 노출
+                </button>
+              </div>
+              <div class="review-context" id="reviewContext" role="tabpanel" aria-labelledby="tab-basic" aria-live="polite">
+                <div>
+                  <span id="reviewContextKicker">Basic Review</span>
+                  <h2 id="reviewContextTitle">출시 전 1차 보안 설정 리뷰</h2>
+                  <p id="reviewContextBody">코드, 설정, 배포 상태를 중심으로 실제 운영 전에 먼저 막아야 할 위험을 분류합니다.</p>
+                </div>
+                <ul id="reviewContextList">
+                  <li>소유자 승인 범위 안의 repo와 공개 URL만 확인</li>
+                  <li>High / Medium / Low 기준으로 수정 우선순위 정리</li>
+                  <li>무단 침투, 대량 요청, 개인정보 다운로드는 제외</li>
+                </ul>
+              </div>
             </div>
 
             <div class="dashboard-grid">
               <section class="risk-panel glass-card" aria-labelledby="risk-title">
                 <h2 id="risk-title">종합 위험도</h2>
                 <div class="risk-cards" aria-label="위험도 요약">
-                  <button class="risk-card high" type="button" data-filter="high">
+                  <article class="risk-card high">
                     <span class="risk-icon"><svg class="lucide" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg></span>
                     <span class="risk-name">위험</span>
                     <strong data-count="1">1</strong>
                     <small>즉시 조치 필요</small>
-                  </button>
-                  <button class="risk-card caution" type="button" data-filter="caution">
+                  </article>
+                  <article class="risk-card caution">
                     <span class="risk-icon"><svg class="lucide" viewBox="0 0 24 24" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg></span>
                     <span class="risk-name">주의</span>
                     <strong data-count="2">2</strong>
                     <small>조치 권장</small>
-                  </button>
-                  <button class="risk-card warn" type="button" data-filter="warn">
+                  </article>
+                  <article class="risk-card warn">
                     <span class="risk-icon"><svg class="lucide" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg></span>
                     <span class="risk-name">경고</span>
                     <strong data-count="3">3</strong>
                     <small>개선 권장</small>
-                  </button>
-                  <button class="risk-card good" type="button" data-filter="good">
+                  </article>
+                  <article class="risk-card good">
                     <span class="risk-icon"><svg class="lucide" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></span>
                     <span class="risk-name">양호</span>
                     <strong data-count="8">8</strong>
                     <small>안전</small>
-                  </button>
+                  </article>
                 </div>
                 <div class="latest-report">
                   <svg class="lucide doc-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
@@ -409,11 +427,10 @@
             <span>합의된 범위 밖 테스트를 요청하지 않습니다.</span>
           </label>
           <button class="submit-button" type="submit">상담 메일 초안 만들기</button>
+          <p class="form-status" id="formStatus" aria-live="polite"></p>
         </form>
       </div>
     </div>
-
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script src="script.js"></script>
   </body>
 </html>

@@ -1,22 +1,22 @@
 # Current Task
 
-- task: 랜딩페이지를 실사용 수준의 콘텐츠와 상세 섹션으로 다듬고 불필요한 사운드/리포트 다운로드 데모를 제거한다.
+- task: 브라우저 코멘트에 따라 히어로 리뷰 항목 버튼의 목적을 명확히 하고 불필요한 하단 알림을 제거한다.
 - phase: implementation
 - status: complete
 
 # Orchestration Profile
 
-- score_total: 7
-- score_breakdown: production_content=3, frontend_multi_section=2, ux_surface_reduction=1, security_wording=1
-- hard_triggers: security service wording and application-form trust surface
+- score_total: 5
+- score_breakdown: targeted_ux_fix=2, interaction_cleanup=2, local_browser_verification=1
+- hard_triggers: browser comment on unclear interaction purpose
 - selected_rules: spec-first, frontend implementation, local verification
 - selected_skills: none
-- selection_reason: MVP 사이트를 실제 의뢰 접수용으로 보이게 만들고 불필요한 데모 기능을 제거하는 프론트엔드/콘텐츠 작업이다.
+- selection_reason: 선택된 리뷰 항목 버튼이 탭/필터인지 불명확하고 하단 토스트가 혼란을 주므로 UI 목적과 피드백 방식을 정리한다.
 - execution_topology: single-session
 - agent_budget: 0
-- efficiency_basis: 콘텐츠, 스타일, JS 정리가 같은 페이지 흐름에 묶여 있어 분리 비용이 더 크다.
+- efficiency_basis: 단일 컴포넌트와 연동 JS 수정이라 분리 비용이 더 크다.
 - spawn_decision: no-spawn
-- reason: score_total 7이나 write set이 하나의 정적 사이트 흐름이고 독립 구현 slice가 뚜렷하지 않아 단일 세션으로 진행한다.
+- reason: score_total 5이고 브라우저 코멘트가 특정 인터랙션 영역에 한정되어 단일 세션에서 수정과 검증을 끝낸다.
 
 # Writer Slot
 
@@ -34,14 +34,14 @@
 - contract_freeze: frozen
 - source: latest user request, README positioning, current static page
 - deliverables:
-  - Remove header sound control and all Web Audio/sound-effect behavior.
-  - Remove fake report download behavior; replace with a realistic sample/report structure preview.
-  - Expand sections so the page reads like an actual service page: review scope, deliverables, process, pricing, FAQ, application CTA.
+  - Replace ambiguous review buttons with a clearly labeled review-preview tab group.
+  - Move feedback into an inline explanation panel instead of bottom toast notifications.
+  - Remove toast behavior for review/risk interactions.
   - Keep no-login/no-dashboard/no-payment/no-Google-integration MVP boundary.
   - Preserve Lucide SVG icon usage instead of handmade CSS/text icons.
 - risks:
+  - Do not add instructional clutter that feels like a prototype note.
   - Do not imply unauthorized scanning or offensive testing.
-  - Do not create fake customer data, fake downloads, or backend behavior that does not exist.
   - Do not introduce secrets or external integrations.
 
 # Reviewer
@@ -65,3 +65,5 @@
 - 2026-05-24 KST: Reclassified for production content pass; remove sound/download demo and expand service sections.
 - 2026-05-24 KST: Removed sound and fake report download; expanded scope, deliverable, pricing, process, FAQ, and apply sections; Chrome verification passed.
 - 2026-05-24 KST: Static checks passed; ready to commit and push production content pass.
+- 2026-05-24 KST: Reclassified for browser comment UX fix; selected single-session targeted update.
+- 2026-05-24 KST: Review rail changed to inline preview tabs; removed bottom toast and risk-card click behavior; in-app browser DOM verification passed.

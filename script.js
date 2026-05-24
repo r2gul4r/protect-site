@@ -1,34 +1,75 @@
 const modal = document.querySelector("#applyModal");
-const toast = document.querySelector("#toast");
 const form = document.querySelector("#applyForm");
+const formStatus = document.querySelector("#formStatus");
 const issueButtons = [...document.querySelectorAll(".issue-list button")];
 const railItems = [...document.querySelectorAll(".rail-item")];
-const riskCards = [...document.querySelectorAll(".risk-card")];
 const codePanel = document.querySelector(".code-panel");
+const reviewContext = document.querySelector("#reviewContext");
+const reviewContextKicker = document.querySelector("#reviewContextKicker");
+const reviewContextTitle = document.querySelector("#reviewContextTitle");
+const reviewContextBody = document.querySelector("#reviewContextBody");
+const reviewContextList = document.querySelector("#reviewContextList");
 
-let toastTimer;
 const intakeEmail = "hello@vibesec.review";
 
-const scopeCopy = {
-  basic: "Basic Review 항목 전체를 기준으로 요약했습니다.",
-  auth: "인증 흐름과 세션 처리 항목을 강조했습니다.",
-  api: "API 노출과 응답 범위 항목을 강조했습니다.",
-  db: "DB 권한과 RLS/Rules 항목을 강조했습니다.",
-  secret: "Secret 노출 가능성과 환경변수 관리 항목을 강조했습니다."
+const reviewDetails = {
+  basic: {
+    kicker: "Basic Review",
+    title: "출시 전 1차 보안 설정 리뷰",
+    body: "코드, 설정, 배포 상태를 중심으로 실제 운영 전에 먼저 막아야 할 위험을 분류합니다.",
+    items: [
+      "소유자 승인 범위 안의 repo와 공개 URL만 확인",
+      "High / Medium / Low 기준으로 수정 우선순위 정리",
+      "무단 침투, 대량 요청, 개인정보 다운로드는 제외"
+    ]
+  },
+  auth: {
+    kicker: "Authentication",
+    title: "로그인과 세션 신뢰성 확인",
+    body: "테스트 계정 기준으로 인증 흐름, 토큰 저장 위치, 로그아웃 처리, 보호 페이지 접근을 확인합니다.",
+    items: [
+      "JWT/session secret 기본값 또는 노출 가능성",
+      "로그아웃 후 토큰 재사용 가능성",
+      "관리자 화면과 일반 사용자 권한 분리"
+    ]
+  },
+  api: {
+    kicker: "API Security",
+    title: "민감 API와 응답 범위 점검",
+    body: "프론트에서 호출하는 API가 필요한 데이터만 반환하는지, CORS와 rate limit이 운영 기준에 맞는지 봅니다.",
+    items: [
+      "민감 API route 공개 여부",
+      "과도한 사용자/주문/관리 데이터 반환",
+      "CORS 허용 origin과 abuse protection 필요성"
+    ]
+  },
+  db: {
+    kicker: "Database Permissions",
+    title: "DB 권한과 RLS/Rules 검토",
+    body: "Supabase, Firebase, 공개 bucket처럼 AI 앱에서 자주 빠지는 데이터 접근 제어를 우선 확인합니다.",
+    items: [
+      "Supabase RLS 또는 Firebase Rules 적용 상태",
+      "owner_id, team_id 등 리소스 소유권 검증",
+      "읽기/쓰기 가능한 공개 storage 경로"
+    ]
+  },
+  secret: {
+    kicker: "Secrets Management",
+    title: "Secret 노출과 환경변수 관리",
+    body: "GitHub repo, 빌드 산출물, 클라이언트 환경변수에 민감 키가 섞이지 않았는지 확인합니다.",
+    items: [
+      "service role key, API key, JWT secret 노출 흔적",
+      "NEXT_PUBLIC 등 클라이언트 공개 변수 오사용",
+      "노출 의심 키의 재발급과 저장소 이력 점검"
+    ]
+  }
 };
-
-function showToast(message) {
-  clearTimeout(toastTimer);
-  toast.textContent = message;
-  toast.classList.add("show");
-  toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
-}
 
 function openModal() {
   modal.hidden = false;
   document.body.style.overflow = "hidden";
+  formStatus.textContent = "";
   modal.querySelector("input")?.focus();
-  showToast("의뢰 신청은 이메일 접수 방식으로 진행됩니다.");
 }
 
 function closeModal() {
@@ -38,9 +79,20 @@ function closeModal() {
 
 function activateRail(item) {
   railItems.forEach((rail) => rail.classList.toggle("active", rail === item));
+  railItems.forEach((rail) => rail.setAttribute("aria-selected", String(rail === item)));
+  reviewContext.setAttribute("aria-labelledby", item.id);
   item.classList.add("pulse");
   setTimeout(() => item.classList.remove("pulse"), 520);
-  showToast(scopeCopy[item.dataset.scope] || "리뷰 항목을 선택했습니다.");
+
+  const detail = reviewDetails[item.dataset.scope] || reviewDetails.basic;
+  reviewContextKicker.textContent = detail.kicker;
+  reviewContextTitle.textContent = detail.title;
+  reviewContextBody.textContent = detail.body;
+  reviewContextList.replaceChildren(...detail.items.map((text) => {
+    const li = document.createElement("li");
+    li.textContent = text;
+    return li;
+  }));
 }
 
 function activateIssue(button) {
@@ -55,7 +107,7 @@ function activateIssue(button) {
     : severity === "warn"
       ? "개선 항목: PUBLIC 변수 사용을 검토합니다."
       : "주의 항목: 권한과 하드코딩 가능성을 확인합니다.";
-  showToast(message);
+  codePanel.setAttribute("aria-label", message);
 }
 
 function submitApplication(event) {
@@ -101,9 +153,7 @@ function submitApplication(event) {
   ].join("\n");
 
   window.location.href = `mailto:${intakeEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  closeModal();
-  form.reset();
-  showToast("메일 앱에서 상담 요청 초안을 확인해 주세요.");
+  formStatus.textContent = "메일 앱에서 상담 요청 초안을 확인해 주세요. 열리지 않으면 hello@vibesec.review로 보내면 됩니다.";
 }
 
 document.querySelectorAll("[data-open-apply]").forEach((button) => {
@@ -124,14 +174,6 @@ document.addEventListener("keydown", (event) => {
 
 railItems.forEach((item) => {
   item.addEventListener("click", () => activateRail(item));
-});
-
-riskCards.forEach((card) => {
-  card.addEventListener("click", () => {
-    card.classList.add("pulse");
-    setTimeout(() => card.classList.remove("pulse"), 520);
-    showToast(`${card.querySelector(".risk-name").textContent} 항목만 리포트에서 확인합니다.`);
-  });
 });
 
 issueButtons.forEach((button) => {
