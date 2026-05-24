@@ -1,22 +1,22 @@
 # Current Task
 
-- task: 신청 모달의 이용약관/개인정보 더미 문구를 운영 초안으로 교체하고 법적 리스크를 줄인다.
+- task: 신청 모달의 개인정보 처리 안내를 실제 사용 가능한 개인정보 처리방침 문구로 구체화한다.
 - phase: verification
 - status: complete
 
 # Orchestration Profile
 
-- score_total: 8
-- score_breakdown: legal_terms=3, privacy_notice=2, security_service_scope=2, chrome_review_and_local_verification=1
-- hard_triggers: legal/privacy wording, security service liability boundary, user-requested Chrome Pro review
-- selected_rules: spec-first, security wording, legal-risk minimization, Chrome extension review, local verification
-- selected_skills: chrome-chatgpt-deep-research memory workflow, browser
-- selection_reason: 이용약관과 개인정보 처리 안내는 고객 권리, 책임 제한, 권한 보증, 개인정보 처리 항목을 명확히 해야 하는 법적 리스크 영역이다.
+- score_total: 7
+- score_breakdown: privacy_notice=3, legal_basis_and_retention=2, public_form_data_flow=1, local_browser_verification=1
+- hard_triggers: legal/privacy wording, public intake form, official privacy criteria dependency
+- selected_rules: spec-first, security wording, legal-risk minimization, local verification
+- selected_skills: browser
+- selection_reason: 개인정보 처리 안내를 실제 처리방침처럼 쓰려면 수집 항목, 목적, 보유기간, 파기, 권리행사, 고충처리 연락처, 위탁/제3자 제공 여부를 구체화해야 한다.
 - execution_topology: single-session
 - agent_budget: 0
-- efficiency_basis: 단일 신청 모달 문구/CSS 수정이며 Chrome 검토와 공식 기준 확인은 주 작업을 막지 않는 보조 검증이다.
+- efficiency_basis: 단일 신청 모달 문구 수정이고 처리방침 항목은 하나의 응집된 카피 블록이라 분리 비용이 더 크다.
 - spawn_decision: no-spawn
-- reason: score_total 8이지만 쓰기 범위가 `index.html`, `styles.css`, `STATE.md`로 좁고 약관 초안 반영은 하나의 응집된 카피 변경이라 단일 세션에서 수정, 검증, 자체 리뷰를 끝낸다.
+- reason: score_total 7이지만 쓰기 범위가 `index.html`, `STATE.md`로 좁고 공식 개인정보 처리방침 기준 확인 후 단일 세션에서 수정과 검증을 끝낸다.
 
 # Writer Slot
 
@@ -36,14 +36,14 @@
 - contract_freeze: frozen
 - source: latest user request, README positioning, current static page
 - deliverables:
-  - Replace dummy terms with an operational draft covering service purpose, owner authority, scope, prohibited actions, output limits, cancellation/refund, confidentiality, and liability limits.
-  - Replace dummy privacy notice with an operational draft covering collected fields, purpose, retention, access data, third-party/tool use, data-subject rights, and safety measures.
-  - Keep visible legal-review warning so the page does not pretend final legal compliance.
+  - Replace privacy draft wording with directly usable privacy policy wording.
+  - Include concrete collection items, processing purpose, legal basis, retention/destruction, third-party provision, processing tools, data-subject rights, security measures, and contact point.
+  - Keep the text aligned with the actual intake form and server-side email dispatch behavior.
   - Preserve required owner, scope, and terms consent before submission.
 - risks:
-  - Do not over-disclaim provider liability or exclude intentional/gross negligence.
-  - Do not weaken customer cancellation/refund rights.
-  - Do not imply full legal compliance before professional review.
+  - Do not claim processing practices that the current form/API does not support.
+  - Do not collect or encourage sensitive secrets in the form.
+  - Do not leave vague "later decide" wording in the user-visible privacy policy.
   - Do not alter form submission or validation behavior.
 
 # Reviewer
@@ -91,3 +91,5 @@
 - 2026-05-24 KST: Added Standard limited manual verification copy, FAQ exclusions, and plan notes; in-app browser verified no broad penetration-test claims.
 - 2026-05-24 KST: Reclassified for operational terms/privacy draft; Chrome Pro review and official privacy/terms criteria are being used to reduce legal-risky wording.
 - 2026-05-24 KST: Replaced dummy terms/privacy text with operational drafts; JS syntax checks and in-app browser modal disclosure verification passed.
+- 2026-05-24 KST: Reclassified for usable privacy policy wording based on current intake form behavior and official privacy-policy criteria.
+- 2026-05-24 KST: Updated privacy disclosure to usable policy wording; JS syntax checks and in-app browser modal verification passed.
