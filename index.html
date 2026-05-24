@@ -241,7 +241,7 @@
         <section class="report-section content-section" id="sample-report" aria-labelledby="report-title">
           <div class="section-heading">
             <span class="section-kicker">Deliverable</span>
-            <h2 id="report-title">샘플 파일보다 실제 전달물 구조를 먼저 보여줍니다</h2>
+            <h2 id="report-title">실제 전달물은 이렇게 구성됩니다</h2>
             <p>리포트는 과장된 공격 시연이 아니라 운영자가 바로 고칠 수 있는 우선순위와 근거 중심으로 정리합니다.</p>
           </div>
           <div class="report-layout">
@@ -272,7 +272,7 @@
           <div class="section-heading">
             <span class="section-kicker">Pricing</span>
             <h2 id="pricing-title">처음엔 가볍게, 필요할 때만 깊게</h2>
-            <p>초기 MVP는 카드결제 없이 상담 후 계좌이체, PayPal, 플랫폼 에스크로로 진행합니다.</p>
+            <p>결제는 점검 범위 확정 후 계좌이체, PayPal, 플랫폼 에스크로 중 선택해 진행합니다.</p>
           </div>
           <div class="pricing-grid">
             <article>
@@ -338,7 +338,7 @@
           <div>
             <span class="section-kicker">Apply</span>
             <h2 id="apply-section-title">로그인 없이, 먼저 범위부터 확인합니다</h2>
-            <p>신청폼은 계정 생성이 아니라 상담 메일 초안을 만드는 용도입니다. 실제 자동 접수 이메일 연동은 다음 단계에서 붙입니다.</p>
+            <p>신청폼은 계정 생성 없이 상담 메일 초안을 만드는 용도입니다. 발송 전 내용을 직접 확인할 수 있습니다.</p>
           </div>
           <button class="primary-cta" type="button" data-open-apply>
             상담 요청 작성
@@ -354,7 +354,7 @@
           </details>
           <details>
             <summary>로그인이나 회원가입이 필요한가요?</summary>
-            <p>초기 MVP에서는 필요 없습니다. 신청폼으로 의뢰 내용을 보내고 이메일로 접수합니다.</p>
+            <p>필수는 아닙니다. 신청폼으로 의뢰 내용을 정리한 뒤 이메일로 접수합니다.</p>
           </details>
           <details>
             <summary>제출하면 바로 자동 점검이 시작되나요?</summary>
@@ -362,11 +362,11 @@
           </details>
           <details>
             <summary>Google Sheets나 고객 대시보드는 없나요?</summary>
-            <p>MVP에서는 없습니다. 반복 접수가 확인되면 이메일 접수를 Google Sheet나 Notion에 자동 기록하는 방식부터 검토합니다.</p>
+            <p>현재 접수는 이메일 중심으로 처리합니다. 반복 의뢰나 팀 단위 운영이 필요하면 동의 기반으로 Google Sheets, Notion 같은 기록 연동을 별도 협의합니다.</p>
           </details>
           <details>
             <summary>리포트는 어떤 형태로 받나요?</summary>
-            <p>상담과 결제 후 Markdown 또는 PDF 형태로 전달합니다. 샘플은 페이지에서 구조만 보여주고 임의 다운로드는 제공하지 않습니다.</p>
+            <p>상담과 결제 후 Markdown 또는 PDF 형태로 전달합니다. 페이지에는 리포트 구성 예시만 공개하고, 실제 리포트는 의뢰 범위에 맞춰 개별 전달합니다.</p>
           </details>
         </section>
       </main>
@@ -376,7 +376,7 @@
       <div class="apply-modal">
         <button class="modal-close" type="button" aria-label="닫기" data-close-modal>×</button>
         <h2 id="applyTitle">의뢰 신청</h2>
-        <p>입력 내용으로 상담 메일 초안을 만듭니다. 자동 전송이나 저장은 아직 하지 않습니다.</p>
+        <p>입력 내용으로 상담 메일 초안을 만듭니다. 자동 전송이나 서버 저장 없이, 사용자가 확인 후 직접 발송합니다.</p>
         <form id="applyForm" novalidate>
           <label>
             이름/닉네임

@@ -1,22 +1,22 @@
 # Current Task
 
-- task: 브라우저 코멘트에 따라 히어로 리뷰 항목 버튼의 목적을 명확히 하고 불필요한 하단 알림을 제거한다.
-- phase: implementation
+- task: 브라우저 코멘트에 따라 가격/FAQ 섹션의 내부 MVP 용어를 실서비스용 문구로 교체한다.
+- phase: verification
 - status: complete
 
 # Orchestration Profile
 
-- score_total: 5
-- score_breakdown: targeted_ux_fix=2, interaction_cleanup=2, local_browser_verification=1
-- hard_triggers: browser comment on unclear interaction purpose
+- score_total: 3
+- score_breakdown: production_copy_fix=2, local_browser_verification=1
+- hard_triggers: browser comment on demo-like public wording
 - selected_rules: spec-first, frontend implementation, local verification
 - selected_skills: none
-- selection_reason: 선택된 리뷰 항목 버튼이 탭/필터인지 불명확하고 하단 토스트가 혼란을 주므로 UI 목적과 피드백 방식을 정리한다.
+- selection_reason: 공개 랜딩 페이지에 내부 단계 표현인 MVP가 노출되어 실사용 서비스 문구로 교체한다.
 - execution_topology: single-session
 - agent_budget: 0
-- efficiency_basis: 단일 컴포넌트와 연동 JS 수정이라 분리 비용이 더 크다.
+- efficiency_basis: 단일 HTML 카피 수정이라 분리 비용이 더 크다.
 - spawn_decision: no-spawn
-- reason: score_total 5이고 브라우저 코멘트가 특정 인터랙션 영역에 한정되어 단일 세션에서 수정과 검증을 끝낸다.
+- reason: score_total 3이고 브라우저 코멘트가 가격/FAQ 카피에 한정되어 단일 세션에서 수정과 검증을 끝낸다.
 
 # Writer Slot
 
@@ -26,7 +26,7 @@
   - `STATE.md`: task state and verification record
   - `index.html`: static landing page UI
   - `styles.css`: visual clone, responsive layout, animation styling
-  - `script.js`: interactions, sound effects, micro interactions
+  - `script.js`: interactions and micro interactions
   - `PLAN.md`: implementation plan note if product scope changes
 
 # Contract Freeze
@@ -34,10 +34,9 @@
 - contract_freeze: frozen
 - source: latest user request, README positioning, current static page
 - deliverables:
-  - Replace ambiguous review buttons with a clearly labeled review-preview tab group.
-  - Move feedback into an inline explanation panel instead of bottom toast notifications.
-  - Remove toast behavior for review/risk interactions.
-  - Keep no-login/no-dashboard/no-payment/no-Google-integration MVP boundary.
+  - Remove user-facing MVP wording from pricing and FAQ copy.
+  - Keep the no-login, no-card-payment, consultation-first product boundary.
+  - Preserve payment options as account transfer, PayPal, and platform escrow.
   - Preserve Lucide SVG icon usage instead of handmade CSS/text icons.
 - risks:
   - Do not add instructional clutter that feels like a prototype note.
@@ -67,3 +66,5 @@
 - 2026-05-24 KST: Static checks passed; ready to commit and push production content pass.
 - 2026-05-24 KST: Reclassified for browser comment UX fix; selected single-session targeted update.
 - 2026-05-24 KST: Review rail changed to inline preview tabs; removed bottom toast and risk-card click behavior; in-app browser DOM verification passed.
+- 2026-05-24 KST: Reclassified for production copy fix after browser comment on MVP wording; selected single-session targeted update.
+- 2026-05-24 KST: Removed public MVP/demo-like wording from pricing, apply, FAQ, and modal copy; in-app browser DOM verification passed with zero visible MVP/demo terms.
