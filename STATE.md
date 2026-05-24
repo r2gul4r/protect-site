@@ -1,22 +1,22 @@
 # Current Task
 
-- task: 신청 모달의 개인정보 처리 안내를 실제 사용 가능한 개인정보 처리방침 문구로 구체화한다.
+- task: 신청폼 접수용 얇은 백엔드와 로컬 실행 경로를 추가한다.
 - phase: verification
 - status: complete
 
 # Orchestration Profile
 
-- score_total: 7
-- score_breakdown: privacy_notice=3, legal_basis_and_retention=2, public_form_data_flow=1, local_browser_verification=1
-- hard_triggers: legal/privacy wording, public intake form, official privacy criteria dependency
-- selected_rules: spec-first, security wording, legal-risk minimization, local verification
-- selected_skills: browser
-- selection_reason: 개인정보 처리 안내를 실제 처리방침처럼 쓰려면 수집 항목, 목적, 보유기간, 파기, 권리행사, 고충처리 연락처, 위탁/제3자 제공 여부를 구체화해야 한다.
+- score_total: 6
+- score_breakdown: public_api_boundary=2, secret_handling=2, local_run_path=1, docs_verification=1
+- hard_triggers: externally reachable intake endpoint, user input validation, email provider secret
+- selected_rules: spec-first, security rules, repository verification
+- selected_skills: none
+- selection_reason: 신청폼은 공개 입력과 메일 발송 키를 다루므로 서버 경계, 입력 검증, 로컬/배포 실행 방법을 명확히 해야 한다.
 - execution_topology: single-session
 - agent_budget: 0
-- efficiency_basis: 단일 신청 모달 문구 수정이고 처리방침 항목은 하나의 응집된 카피 블록이라 분리 비용이 더 크다.
+- efficiency_basis: 서버리스 함수 보강, 로컬 서버, 문서 업데이트가 같은 접수 흐름에 묶여 있어 단일 세션이 더 안전하다.
 - spawn_decision: no-spawn
-- reason: score_total 7이지만 쓰기 범위가 `index.html`, `STATE.md`로 좁고 공식 개인정보 처리방침 기준 확인 후 단일 세션에서 수정과 검증을 끝낸다.
+- reason: score_total 6이고 보안 입력 경계가 있지만 구현 범위가 얇은 Node 서버리스 API와 로컬 실행 경로에 한정되어 단일 세션에서 수정과 검증을 끝낸다.
 
 # Writer Slot
 
@@ -36,15 +36,15 @@
 - contract_freeze: frozen
 - source: latest user request, README positioning, current static page
 - deliverables:
-  - Replace privacy draft wording with directly usable privacy policy wording.
-  - Include concrete collection items, processing purpose, legal basis, retention/destruction, third-party provision, processing tools, data-subject rights, security measures, and contact point.
-  - Keep the text aligned with the actual intake form and server-side email dispatch behavior.
-  - Preserve required owner, scope, and terms consent before submission.
+  - Harden `/api/inquiries` as the mail intake boundary with opaque errors, body limits, origin checks, and simple abuse throttling.
+  - Add a local no-dependency server that serves static files and routes `/api/inquiries` to the same handler.
+  - Add runnable npm scripts and environment variable documentation.
+  - Preserve the existing frontend form contract and server-side-only email secret handling.
 - risks:
-  - Do not claim processing practices that the current form/API does not support.
-  - Do not collect or encourage sensitive secrets in the form.
-  - Do not leave vague "later decide" wording in the user-visible privacy policy.
-  - Do not alter form submission or validation behavior.
+  - Never expose `RESEND_API_KEY` to the browser.
+  - Validate untrusted JSON before email dispatch.
+  - Keep user-facing errors opaque.
+  - Do not introduce DB/Auth/admin scope creep.
 
 # Reviewer
 
@@ -93,3 +93,5 @@
 - 2026-05-24 KST: Replaced dummy terms/privacy text with operational drafts; JS syntax checks and in-app browser modal disclosure verification passed.
 - 2026-05-24 KST: Reclassified for usable privacy policy wording based on current intake form behavior and official privacy-policy criteria.
 - 2026-05-24 KST: Updated privacy disclosure to usable policy wording; JS syntax checks and in-app browser modal verification passed.
+- 2026-05-24 KST: Reclassified for thin backend intake implementation; selected single-session with security boundary hardening and local verification.
+- 2026-05-24 KST: Added local Node server, npm scripts, env template, hardened inquiry API, and docs; syntax, handler, rate-limit, origin, static-file, and local API checks passed.

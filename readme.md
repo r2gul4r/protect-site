@@ -445,11 +445,12 @@ High / Medium / Low 리포트와 수정 가이드를 제공합니다.
 
 | 영역 | 추천 |
 | --- | --- |
-| 프론트 | Next.js |
-| 스타일 | Tailwind CSS |
+| 프론트 | 정적 HTML/CSS/JS |
+| 스타일 | 순수 CSS |
 | 신청폼 | 자체 폼 + `/api/inquiries` 접수 API |
 | 저장 | 처음엔 이메일 접수와 수동 스프레드시트 기록 |
-| 배포 | Vercel 또는 Netlify 무료 플랜 후보 |
+| 백엔드 | Node 서버리스 함수 1개 |
+| 배포 | Vercel 무료 플랜 후보 |
 | 리포트 | Markdown → PDF |
 | 자동화 | Codex CLI / GitHub repo 기반 |
 | 연락 | 이메일, Discord, KakaoTalk 오픈채팅 |
@@ -457,7 +458,7 @@ High / Medium / Low 리포트와 수정 가이드를 제공합니다.
 ### DB 없이 시작하는 구조
 
 ```text
-Next.js 랜딩페이지
+정적 랜딩페이지
 → 신청폼 제출
 → 서버리스 API에서 이메일로 접수
 → Notion/Google Sheet에 수동 기록
@@ -468,6 +469,25 @@ Next.js 랜딩페이지
 ```
 
 접수 API는 브라우저에 메일 서비스 키를 노출하지 않는다. 운영 배포에서는 `RESEND_API_KEY`, `INTAKE_FROM_EMAIL`, `INTAKE_TO_EMAIL` 환경변수를 서버에 설정한다.
+
+### 로컬 실행
+
+```powershell
+Copy-Item .env.example .env
+notepad .env
+npm.cmd run dev
+```
+
+로컬 서버는 기본 `http://127.0.0.1:4174`에서 정적 페이지와 `/api/inquiries`를 같이 제공한다. PowerShell 실행 정책 때문에 `npm`이 막히면 `npm.cmd`를 사용한다. Resend 키가 없으면 신청 API는 `INTAKE_NOT_CONFIGURED`로 실패하며, 브라우저에는 설정 필요 메시지만 보여준다.
+
+### 접수 API 보안 경계
+
+- 요청 본문은 24KB 이하 JSON만 받는다.
+- 이름, 이메일, URL, repo 접근 방식, 상품, 운영 상태, 필수 동의 값을 서버에서 다시 검증한다.
+- `RESEND_API_KEY`는 서버 환경변수에서만 읽고 프론트로 보내지 않는다.
+- 같은 origin 요청만 허용하며, 추가 허용 origin은 `INTAKE_ALLOWED_ORIGINS`에 쉼표로 지정한다.
+- IP 기준 간단한 rate limit을 적용해 반복 접수 남용을 줄인다.
+- 고객에게는 내부 오류와 메일 발송 제공자 오류를 자세히 노출하지 않는다.
 
 ---
 
@@ -520,7 +540,7 @@ Next.js 랜딩페이지
 ### Day 2: 웹사이트 골격
 
 ```text
-- Next.js 프로젝트 생성
+- 정적 사이트와 서버리스 접수 API 실행 경로 정리
 - 메인 페이지 제작
 - 가격표 제작
 - 신청 페이지 제작

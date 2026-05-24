@@ -31,3 +31,11 @@
 - summary: Initial visual verification attempts through direct `file://` Chrome navigation and bundled Playwright failed.
 - details: Chrome extension policy blocked `file://` navigation; bundled Playwright lacked the browser executable and shell background server attempts were unstable. Verification was rerouted to the Chrome extension against a localhost static server created inside the browser automation session.
 - status: resolved; Chrome render check, SVG icon check, modal/form interactions, sound toggle, and report demo all passed on `http://127.0.0.1:4173/index.html`.
+
+## 2026-05-24 KST
+
+- time: 2026-05-24 KST
+- location: `D:\git\protect-site(semi)`
+- summary: `Start-Process` could not launch the local Node server because the Windows environment exposed duplicate `Path`/`PATH` keys.
+- details: Both normal `Start-Process` and full node path with `-UseNewEnvironment` failed with `Item has already been added. Key in dictionary: 'Path' Key being added: 'PATH'`; `cmd /c start` and `Start-Job` did not leave a stable listener.
+- status: resolved by starting the local verification server through the persistent Node runtime instead of a shell background process.
