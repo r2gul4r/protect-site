@@ -1,22 +1,22 @@
 # Current Task
 
-- task: 브라우저 코멘트에 따라 DB/권한 점검 문구가 특정 벤더에만 묶여 보이지 않도록 수정한다.
+- task: Standard 플랜에 승인 범위 내 제한적 수동 검증 옵션을 추가하고 침투테스트 오해를 줄인다.
 - phase: verification
 - status: complete
 
 # Orchestration Profile
 
-- score_total: 3
-- score_breakdown: public_scope_copy_update=2, local_browser_verification=1
-- hard_triggers: browser comment on overly vendor-specific DB wording
-- selected_rules: spec-first, frontend implementation, local verification
+- score_total: 4
+- score_breakdown: security_scope_copy=2, product_positioning=1, local_browser_verification=1
+- hard_triggers: request to add penetration-test-like capability safely
+- selected_rules: spec-first, frontend implementation, security wording, local verification
 - selected_skills: none
-- selection_reason: 공개 리뷰 범위 문구가 Supabase/Firebase만 점검하는 것처럼 보이지 않도록 데이터 접근 권한 전반으로 표현을 넓힌다.
+- selection_reason: 침투테스트로 오해될 표현은 피하고 Standard 플랜에 승인 범위 내 제한적 재현 확인을 상품력 있게 추가한다.
 - execution_topology: single-session
 - agent_budget: 0
 - efficiency_basis: 단일 모달 마크업/CSS 수정이라 분리 비용이 더 크다.
 - spawn_decision: no-spawn
-- reason: score_total 3이고 공개 범위 카드와 리뷰 미리보기 카피 수정에 한정되어 단일 세션에서 수정과 검증을 끝낸다.
+- reason: score_total 4이고 Standard 플랜, FAQ, 프로세스 카피에 한정된 보안 범위 표현 수정이라 단일 세션에서 수정과 검증을 끝낸다.
 
 # Writer Slot
 
@@ -36,13 +36,13 @@
 - contract_freeze: frozen
 - source: latest user request, README positioning, current static page
 - deliverables:
-  - Generalize DB/Rules wording to data access permission review.
-  - Remove public-facing dependence on Supabase/Firebase examples in scope and preview copy.
-  - Keep concrete review items understandable for common AI app stacks.
+  - Add limited manual verification language to Standard plan.
+  - Clarify that verification is test-account and agreed-scope only.
+  - Keep prohibited actions visible: no unauthorized scans, load tests, destructive tests, or personal-data extraction.
   - Preserve Lucide SVG icon usage instead of handmade CSS/text icons.
 - risks:
-  - Do not make the scope too vague to understand.
-  - Do not imply unsupported database-specific tooling.
+  - Do not market broad penetration testing as a core service.
+  - Do not imply exploit execution or destructive testing.
   - Do not alter form submission or pricing behavior.
 
 # Reviewer
@@ -86,3 +86,5 @@
 - 2026-05-24 KST: Lowered displayed prices to Basic 39k, Standard 99k, Fix PR 59k; added original-price strike-through and launch-discount badges; browser verification passed.
 - 2026-05-24 KST: Reclassified for generalizing DB/permission wording away from vendor-specific public copy.
 - 2026-05-24 KST: Replaced public DB Rules/Supabase/Firebase wording with generic data access permission review; in-app browser verified zero vendor-specific mentions in scope and preview.
+- 2026-05-24 KST: Reclassified for limited manual verification positioning in Standard without broad penetration-test claims.
+- 2026-05-24 KST: Added Standard limited manual verification copy, FAQ exclusions, and plan notes; in-app browser verified no broad penetration-test claims.
