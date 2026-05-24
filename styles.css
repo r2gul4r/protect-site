@@ -1219,6 +1219,47 @@ select option {
   line-height: 1.55;
 }
 
+.policy-disclosures {
+  display: grid;
+  gap: 8px;
+}
+
+.policy-disclosure {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .13);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, .04);
+}
+
+.policy-disclosure summary {
+  padding: 12px 14px;
+  color: #eef3f4;
+  font-size: 13px;
+}
+
+.policy-body {
+  padding: 0 14px 14px;
+  color: #c8d3d6;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.policy-body p {
+  margin: 0 0 8px;
+  color: #aeb9bd;
+}
+
+.policy-body ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.policy-body li + li {
+  margin-top: 6px;
+}
+
 .submit-button {
   height: 48px;
   border: 0;

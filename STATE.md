@@ -1,22 +1,22 @@
 # Current Task
 
-- task: 브라우저 코멘트에 따라 신청 모달 내부 스크롤바를 보이지 않게 처리한다.
+- task: 브라우저 코멘트에 따라 신청 모달에서 이용약관과 개인정보 처리 안내 더미 초안을 펼쳐볼 수 있게 한다.
 - phase: verification
 - status: complete
 
 # Orchestration Profile
 
-- score_total: 2
-- score_breakdown: targeted_modal_visual_fix=1, local_browser_verification=1
-- hard_triggers: browser comment on visible modal scrollbar
+- score_total: 3
+- score_breakdown: consent_content_addition=2, local_browser_verification=1
+- hard_triggers: browser comment on missing terms/privacy content
 - selected_rules: spec-first, frontend implementation, local verification
 - selected_skills: none
-- selection_reason: 모달 내부 스크롤 동작은 유지하되 시각적으로 노출되는 스크롤바를 숨겨 화면 밀도를 낮춘다.
+- selection_reason: 필수 동의 체크박스가 참조하는 이용약관과 개인정보 처리 안내 내용을 모달 안에서 확인할 수 있게 한다.
 - execution_topology: single-session
 - agent_budget: 0
 - efficiency_basis: 단일 모달 마크업/CSS 수정이라 분리 비용이 더 크다.
 - spawn_decision: no-spawn
-- reason: score_total 2이고 브라우저 코멘트가 모달 스크롤바 노출에 한정되어 단일 세션에서 수정과 검증을 끝낸다.
+- reason: score_total 3이고 브라우저 코멘트가 동의 문구의 참조 콘텐츠에 한정되어 단일 세션에서 수정과 검증을 끝낸다.
 
 # Writer Slot
 
@@ -36,13 +36,13 @@
 - contract_freeze: frozen
 - source: latest user request, README positioning, current static page
 - deliverables:
-  - Hide the modal content scrollbar visually across modern browsers.
-  - Preserve internal scroll behavior and fixed close button behavior.
-  - Avoid layout shift from scrollbar gutter changes.
+  - Add expandable dummy terms content inside the application modal.
+  - Add expandable dummy privacy notice content inside the application modal.
+  - Keep required consent checkbox and form validation intact.
   - Preserve Lucide SVG icon usage instead of handmade CSS/text icons.
 - risks:
+  - Do not present dummy legal text as finalized legal review.
   - Do not regress modal form validation or submit behavior.
-  - Do not create overlapping controls on narrow viewports.
   - Do not alter server-side intake behavior.
 
 # Reviewer
@@ -80,3 +80,5 @@
 - 2026-05-24 KST: Split modal scroll into `.apply-modal-content`; close button stays on the modal frame while internal content scrolls.
 - 2026-05-24 KST: Reclassified for hidden modal scrollbar; selected single-session targeted update.
 - 2026-05-24 KST: Hid `.apply-modal-content` scrollbar while preserving internal scroll; in-app browser verified `canScroll=true` and hidden scrollbar styles.
+- 2026-05-24 KST: Reclassified for expandable dummy terms and privacy content in application modal; selected single-session targeted update.
+- 2026-05-24 KST: Added expandable dummy terms/privacy notices; in-app browser verified both disclosures open and required consent remains intact.
