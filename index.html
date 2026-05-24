@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="VibeSec Review - AI 앱 출시 전 보안 설정 리뷰">
+    <title>VibeSec Review</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="page-shell" id="top">
+      <header class="site-header" aria-label="주요 메뉴">
+        <a class="brand" href="#top" aria-label="VibeSec Review 홈">
+          <span class="brand-mark" aria-hidden="true">
+            <svg class="lucide" viewBox="0 0 24 24" role="img">
+              <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+              <path d="m9 12 2 2 4-4"></path>
+            </svg>
+          </span>
+          <span><strong>VibeSec</strong> Review</span>
+        </a>
+
+        <nav class="nav-links" aria-label="페이지 섹션">
+          <a href="#service">서비스 소개</a>
+          <a href="#review">리뷰 항목</a>
+          <a href="#process">프로세스</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <button class="sound-toggle" type="button" aria-label="사운드 켜기" aria-pressed="false">
+          <svg class="lucide sound-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path>
+            <path d="M16 9a5 5 0 0 1 0 6"></path>
+            <path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path>
+          </svg>
+        </button>
+      </header>
+
+      <main>
+        <section class="hero" id="service" aria-labelledby="hero-title">
+          <div class="workspace-bg" aria-hidden="true">
+            <div class="editor-pane">
+              <div class="line muted">import express from <span>'express'</span>;</div>
+              <div class="line">const app = express();</div>
+              <div class="line dim">app.use(express.json());</div>
+              <div class="line">app.listen(process.env.PORT || 3000);</div>
+              <div class="line warn">export default app;</div>
+            </div>
+            <div class="checklist-pane">
+              <p>DEPLOYMENT CHECKLIST</p>
+              <ul>
+                <li class="ok">
+                  <svg class="lucide mini-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                  <span>Environment Variables</span>
+                  <svg class="lucide mini-status" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 12 2 2 4-4"></path></svg>
+                </li>
+                <li class="ok">
+                  <svg class="lucide mini-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                  <span>Authentication</span>
+                  <svg class="lucide mini-status" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 12 2 2 4-4"></path></svg>
+                </li>
+                <li class="ok">
+                  <svg class="lucide mini-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                  <span>API Security</span>
+                  <svg class="lucide mini-status" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 12 2 2 4-4"></path></svg>
+                </li>
+                <li class="warn">
+                  <svg class="lucide mini-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
+                  <span>Database Permissions</span>
+                  <svg class="lucide mini-status" viewBox="0 0 24 24" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
+                </li>
+                <li class="warn">
+                  <svg class="lucide mini-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
+                  <span>Secrets Management</span>
+                  <svg class="lucide mini-status" viewBox="0 0 24 24" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
+                </li>
+                <li class="ok">
+                  <svg class="lucide mini-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                  <span>Security Headers</span>
+                  <svg class="lucide mini-status" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 12 2 2 4-4"></path></svg>
+                </li>
+                <li class="ok">
+                  <svg class="lucide mini-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                  <span>CORS Configuration</span>
+                  <svg class="lucide mini-status" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 12 2 2 4-4"></path></svg>
+                </li>
+                <li class="ok">
+                  <svg class="lucide mini-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                  <span>Logging & Monitoring</span>
+                  <svg class="lucide mini-status" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 12 2 2 4-4"></path></svg>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="hero-inner">
+            <div class="hero-copy">
+              <h1 id="hero-title">AI 앱 출시 전<br>보안 설정 리뷰</h1>
+              <p>VibeSec Review는 AI로 개발된 웹 앱의 보안 설정을<br>한국의 실제 서비스 운영 기준에 맞춰 검토해 드립니다.</p>
+              <button class="primary-cta" type="button" data-open-apply>
+                의뢰하기
+                <svg class="lucide cta-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+              </button>
+            </div>
+
+            <div class="review-rail" id="review" aria-label="리뷰 항목 선택">
+              <button class="rail-item active" type="button" data-scope="basic">
+                <span>Basic Review</span>
+              </button>
+              <button class="rail-item" type="button" data-scope="auth">
+                <svg class="lucide icon ok" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                인증
+              </button>
+              <button class="rail-item" type="button" data-scope="api">
+                <svg class="lucide icon ok" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                API
+              </button>
+              <button class="rail-item" type="button" data-scope="db">
+                <svg class="lucide icon warn" viewBox="0 0 24 24" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
+                DB 권한
+              </button>
+              <button class="rail-item" type="button" data-scope="secret">
+                <svg class="lucide icon danger" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg>
+                Secret 노출
+              </button>
+            </div>
+
+            <div class="dashboard-grid">
+              <section class="risk-panel glass-card" aria-labelledby="risk-title">
+                <h2 id="risk-title">종합 위험도</h2>
+                <div class="risk-cards" aria-label="위험도 요약">
+                  <button class="risk-card high" type="button" data-filter="high">
+                    <span class="risk-icon"><svg class="lucide" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg></span>
+                    <span class="risk-name">위험</span>
+                    <strong data-count="1">1</strong>
+                    <small>즉시 조치 필요</small>
+                  </button>
+                  <button class="risk-card caution" type="button" data-filter="caution">
+                    <span class="risk-icon"><svg class="lucide" viewBox="0 0 24 24" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg></span>
+                    <span class="risk-name">주의</span>
+                    <strong data-count="2">2</strong>
+                    <small>조치 권장</small>
+                  </button>
+                  <button class="risk-card warn" type="button" data-filter="warn">
+                    <span class="risk-icon"><svg class="lucide" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg></span>
+                    <span class="risk-name">경고</span>
+                    <strong data-count="3">3</strong>
+                    <small>개선 권장</small>
+                  </button>
+                  <button class="risk-card good" type="button" data-filter="good">
+                    <span class="risk-icon"><svg class="lucide" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></span>
+                    <span class="risk-name">양호</span>
+                    <strong data-count="8">8</strong>
+                    <small>안전</small>
+                  </button>
+                </div>
+                <div class="latest-report">
+                  <svg class="lucide doc-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+                  <span>최근 검토 리포트</span>
+                  <button type="button" id="downloadReport">report_2024-05-20.pdf</button>
+                  <small>(다운로드)</small>
+                </div>
+              </section>
+
+              <section class="code-panel glass-card" aria-labelledby="code-title">
+                <div class="code-area">
+                  <h2 id="code-title">설정/코드 리뷰 미리보기</h2>
+                  <div class="file-tab">
+                    <svg class="lucide file-dot" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+                    <span>.env.example</span>
+                    <b aria-hidden="true">◆</b>
+                  </div>
+                  <pre aria-label="환경변수 예시 코드"><code><span>1</span> DATABASE_URL=postgres://user:pass@db:5432/app
+<span>2</span> OPENAI_API_KEY=sk-••••••••••••••••••••••••
+<span>3</span> JWT_SECRET=your_jwt_secret
+<span>4</span> AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+<span>5</span> AWS_SECRET_ACCESS_KEY=••••••••••••••••••••••••••••••••
+<span>6</span> NEXT_PUBLIC_API_URL=https://api.example.com
+<span>7</span> NODE_ENV=production</code></pre>
+                </div>
+                <aside class="issue-list" aria-labelledby="issue-title">
+                  <h3 id="issue-title">발견된 이슈</h3>
+                  <button type="button" data-severity="high"><i></i><b>심각</b> Secret 노출 가능성 (JWT_SECRET)</button>
+                  <button type="button" data-severity="caution"><i></i><b>주의</b> DB 계정 권한 과다 가능성</button>
+                  <button type="button" data-severity="caution"><i></i><b>주의</b> AWS 액세스 키 하드코딩</button>
+                  <button type="button" data-severity="warn"><i></i><b>개선</b> PUBLIC 변수 사용 검토 필요</button>
+                  <a href="#review" class="all-issues-link">
+                    <span>전체 항목 보기</span>
+                    <svg class="lucide" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                  </a>
+                </aside>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section class="process-section" id="process" aria-labelledby="process-title">
+          <h2 id="process-title">VibeSec Review는 이렇게 진행됩니다</h2>
+          <div class="process-grid">
+            <article>
+              <span>1</span>
+              <h3>범위 확인</h3>
+              <p>소유자 승인 여부와 점검 제외 범위를 먼저 고정합니다.</p>
+            </article>
+            <article>
+              <span>2</span>
+              <h3>설정 리뷰</h3>
+              <p>인증, API, DB 권한, Secret, 배포 설정을 확인합니다.</p>
+            </article>
+            <article>
+              <span>3</span>
+              <h3>리포트 전달</h3>
+              <p>High / Medium / Low 기준으로 수정 우선순위를 정리합니다.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="faq-section" id="faq" aria-labelledby="faq-title">
+          <h2 id="faq-title">FAQ</h2>
+          <details>
+            <summary>제 사이트를 실제로 해킹하나요?</summary>
+            <p>아니요. 소유자 승인 기반으로 코드와 설정을 점검하고, 합의된 범위 안에서만 확인합니다.</p>
+          </details>
+          <details>
+            <summary>로그인이나 회원가입이 필요한가요?</summary>
+            <p>초기 MVP에서는 필요 없습니다. 신청폼으로 의뢰 내용을 보내고 이메일로 접수합니다.</p>
+          </details>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="applyModal" role="dialog" aria-modal="true" aria-labelledby="applyTitle" hidden>
+      <div class="apply-modal">
+        <button class="modal-close" type="button" aria-label="닫기" data-close-modal>×</button>
+        <h2 id="applyTitle">의뢰 신청</h2>
+        <p>초기 MVP는 계정 없이 이메일로 상담 요청을 접수합니다.</p>
+        <form id="applyForm" novalidate>
+          <label>
+            이름/닉네임
+            <input name="name" type="text" autocomplete="name" minlength="2" required placeholder="홍길동">
+          </label>
+          <label>
+            이메일
+            <input name="email" type="email" autocomplete="email" required placeholder="hello@example.com">
+          </label>
+          <label>
+            서비스 URL
+            <input name="url" type="url" required placeholder="https://example.com">
+          </label>
+          <label>
+            점검 상품
+            <select name="plan" required>
+              <option value="Basic Review">Basic Review</option>
+              <option value="Standard Review">Standard Review</option>
+              <option value="Fix PR Add-on">Fix PR Add-on</option>
+            </select>
+          </label>
+          <label class="checkbox-line">
+            <input name="owner" type="checkbox" required>
+            <span>본인은 점검 대상의 소유자 또는 관리 권한자입니다.</span>
+          </label>
+          <label class="checkbox-line">
+            <input name="scope" type="checkbox" required>
+            <span>합의된 범위 밖 테스트를 요청하지 않습니다.</span>
+          </label>
+          <button class="submit-button" type="submit">상담 요청 생성</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
