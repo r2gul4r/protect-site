@@ -1,22 +1,22 @@
 # Current Task
 
-- task: 브라우저 코멘트에 따라 가격과 플랜을 낮추고 런칭 할인처럼 보이도록 조정한다.
+- task: 브라우저 코멘트에 따라 DB/권한 점검 문구가 특정 벤더에만 묶여 보이지 않도록 수정한다.
 - phase: verification
 - status: complete
 
 # Orchestration Profile
 
-- score_total: 4
-- score_breakdown: pricing_positioning=2, public_copy_update=1, local_browser_verification=1
-- hard_triggers: browser comment on pricing positioning mismatch
+- score_total: 3
+- score_breakdown: public_scope_copy_update=2, local_browser_verification=1
+- hard_triggers: browser comment on overly vendor-specific DB wording
 - selected_rules: spec-first, frontend implementation, local verification
 - selected_skills: none
-- selection_reason: 현재 역량/시장 진입 단계에 맞게 가격 부담을 낮추고 공개 화면에는 런칭 할인 적용가로 자연스럽게 표현한다.
+- selection_reason: 공개 리뷰 범위 문구가 Supabase/Firebase만 점검하는 것처럼 보이지 않도록 데이터 접근 권한 전반으로 표현을 넓힌다.
 - execution_topology: single-session
 - agent_budget: 0
 - efficiency_basis: 단일 모달 마크업/CSS 수정이라 분리 비용이 더 크다.
 - spawn_decision: no-spawn
-- reason: score_total 4이고 가격 섹션과 문서 가격표의 일관성 수정이라 단일 세션에서 수정과 검증을 끝낸다.
+- reason: score_total 3이고 공개 범위 카드와 리뷰 미리보기 카피 수정에 한정되어 단일 세션에서 수정과 검증을 끝낸다.
 
 # Writer Slot
 
@@ -36,14 +36,14 @@
 - contract_freeze: frozen
 - source: latest user request, README positioning, current static page
 - deliverables:
-  - Lower Basic, Standard, and Fix PR displayed prices.
-  - Add original price and launch discount visual treatment.
-  - Keep pricing copy honest without exposing internal confidence/experience wording.
+  - Generalize DB/Rules wording to data access permission review.
+  - Remove public-facing dependence on Supabase/Firebase examples in scope and preview copy.
+  - Keep concrete review items understandable for common AI app stacks.
   - Preserve Lucide SVG icon usage instead of handmade CSS/text icons.
 - risks:
-  - Do not create misleading fake scarcity.
-  - Do not regress pricing layout on desktop/mobile.
-  - Keep README price references aligned with the page.
+  - Do not make the scope too vague to understand.
+  - Do not imply unsupported database-specific tooling.
+  - Do not alter form submission or pricing behavior.
 
 # Reviewer
 
@@ -84,3 +84,5 @@
 - 2026-05-24 KST: Added expandable dummy terms/privacy notices; in-app browser verified both disclosures open and required consent remains intact.
 - 2026-05-24 KST: Reclassified for launch-discount pricing adjustment; selected single-session targeted update.
 - 2026-05-24 KST: Lowered displayed prices to Basic 39k, Standard 99k, Fix PR 59k; added original-price strike-through and launch-discount badges; browser verification passed.
+- 2026-05-24 KST: Reclassified for generalizing DB/permission wording away from vendor-specific public copy.
+- 2026-05-24 KST: Replaced public DB Rules/Supabase/Firebase wording with generic data access permission review; in-app browser verified zero vendor-specific mentions in scope and preview.

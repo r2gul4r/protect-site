@@ -49,12 +49,12 @@ const reviewDetails = {
   },
   db: {
     kicker: "Database Permissions",
-    title: "DB 권한과 RLS/Rules 검토",
-    body: "Supabase, Firebase, 공개 bucket처럼 AI 앱에서 자주 빠지는 데이터 접근 제어를 우선 확인합니다.",
+    title: "데이터 접근 권한 검토",
+    body: "사용 중인 DB, 인증 서비스, 스토리지 구조에 맞춰 데이터가 필요한 사용자에게만 열리는지 확인합니다.",
     items: [
-      "Supabase RLS 또는 Firebase Rules 적용 상태",
+      "row-level 권한 또는 백엔드 접근 제어 적용 상태",
       "owner_id, team_id 등 리소스 소유권 검증",
-      "읽기/쓰기 가능한 공개 storage 경로"
+      "읽기/쓰기 가능한 공개 테이블과 스토리지 경로"
     ]
   },
   secret: {
